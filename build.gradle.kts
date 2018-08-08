@@ -13,7 +13,8 @@ dependencies {
         "com.atlassian.performance.tools:aws-resources:0.0.1",
         "com.atlassian.performance.tools:infrastructure:0.0.2",
         "com.atlassian.performance.tools:aws-infrastructure:0.0.1",
-        "com.atlassian.performance.tools:jira-software-actions:0.1.0"
+        "com.atlassian.performance.tools:jira-software-actions:0.1.1",
+        "com.atlassian.performance.tools:virtual-users:0.0.3"
     ).plus(
         log4jCore()
     ).forEach { compile(it) }
