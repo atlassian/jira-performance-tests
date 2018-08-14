@@ -16,6 +16,9 @@ If you **already have a test environment**, see [BTF tests](docs/tests/BTF.md).
 
 If you're a **Jira App developer** and would like to test your App, see our 
 [app tests](docs/tests/APP.md). 
+
+If you're an **Atlassian Developer**, 
+see our [internal tests](https://stash.atlassian.com/projects/JIRASERVER/repos/jira-performance-tests/browse/README.md).
  
 ## Features
 
