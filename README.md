@@ -18,6 +18,7 @@ If you're a **Jira App developer** and would like to test your App, see our
 [app tests](docs/tests/APP.md). 
  
 ## Features
+
   - Runs performance tests
   - Provisions Jira instance in AWS infrastructure
   - Generates a report
@@ -33,16 +34,12 @@ If you're a **Jira App developer** and would like to test your App, see our
   - (planned) Supports Jira 8+
 
 ## Reporting issues
+
 (**incomplete**)
 
 ## Contributing
-(**incomplete**)
 
-## Releasing
-
-Versioning, releasing and distribution are managed by the [gradle-release] plugin.
-
-[gradle-release]: https://bitbucket.org/atlassian/gradle-release/src/release-0.0.2/README.md
+See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 
