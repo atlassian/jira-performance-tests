@@ -38,7 +38,8 @@ see our [internal tests](https://stash.atlassian.com/projects/JIRASERVER/repos/j
 
 ## Reporting issues
 
-(**incomplete**)
+We track all the changes in a [public issue tracker](https://ecosystem.atlassian.net/secure/RapidBoard.jspa?rapidView=457&projectKey=JPERF).
+All the suggestions and bug reports are welcome.
 
 ## Contributing
 

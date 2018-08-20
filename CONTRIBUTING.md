@@ -22,7 +22,7 @@ Pull requests, issues and comments are welcome. For pull requests:
   - Follow the existing style
   - Separate unrelated changes into multiple pull requests
   
-See the [existing issues](https://bitbucket.org/atlassian/jira-performance-tests/issues?status=new&status=open) for things to start contributing.
+See the [existing issues](https://ecosystem.atlassian.net/projects/JPERF/issues/?filter=allissues) for things to start contributing.
 
 For bigger changes, make sure you start a discussion first by creating
 an issue and explaining the intended change.
