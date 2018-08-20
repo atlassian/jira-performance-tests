@@ -15,22 +15,22 @@ one with the reference app installed and another one without the app. It runs de
 
 1. Clone the repository
 
-```
-git clone git@bitbucket.org:atlassian/jira-performance-tests.git
-```
+    ```
+    git clone git@bitbucket.org:atlassian/jira-performance-tests.git
+    ```
 
 2. Open the maven project located in `examples/ref-app` directory in an IDE of your choice
-3. Run `mvn verify` in `examples/ref-app` directory
+3. Run `mvn -f examples/ref-app/pom.xml install` in the main JPT directory
 4. The test will ask for AWS credentials (**incomplete** You can implement AWS auth)
-5. It should take around 25 minutes (**incomplete** check the time)
+5. It takes 30 - 40 minutes to complete
  
-In the end, you should see a simple report with results
+    In the end, you should see a simple report with results
 
-```
-TODO example console report
-```
+    ```
+    TODO example console report
+    ```
 
-The test will also generate detailed a detailed report (**incomplete** example) and a chart (**incomplete** example)
+    The test will also generate detailed a detailed report (**incomplete** example) and a chart (**incomplete** example)
  
 6. You can modify (**incomplete** link) test to check if it works with your app.
     - you can point to your app by (**incomplete**)
