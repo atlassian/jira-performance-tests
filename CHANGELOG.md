@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [Unreleased]: https://bitbucket.org/atlassian/jira-performance-tests/branches/compare/release-0.0.2%0Dmaster
 ### Fixed
 - Label for experiment test cohort
+- Distinguish between cohorts even if we test the same version of a plugin
 ### Added
 - Run performance test without any additional apps installed
 ## [0.0.2] - 2018-08-08

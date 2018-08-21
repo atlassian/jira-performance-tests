@@ -68,8 +68,9 @@ class AwsPluginTester(
     ) {
         fun run(workspace: TestWorkspace): Results {
             //provisioning
+            val baselineLabel = baselineApp.getLabel()
             val baselineTest = provisioningTest(
-                cohort = baselineApp.getLabel(),
+                cohort = baselineLabel,
                 jira = standalone(
                     jiraVersion,
                     dataset,
@@ -78,8 +79,15 @@ class AwsPluginTester(
                 feature = label,
                 shadowJar = shadowJar
             )
+            val experimentLabel = experimentApp.getLabel()
+            val experimentCohort = if (baselineLabel == experimentLabel) {
+                "$experimentLabel*"
+            } else {
+                experimentLabel
+            }
+
             val experimentTest = provisioningTest(
-                cohort = experimentApp.getLabel(),
+                cohort = experimentCohort,
                 jira = standalone(
                     jiraVersion,
                     dataset,
