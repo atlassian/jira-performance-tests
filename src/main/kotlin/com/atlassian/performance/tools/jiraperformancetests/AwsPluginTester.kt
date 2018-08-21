@@ -16,8 +16,8 @@ import com.atlassian.performance.tools.infrastructure.virtualusers.SshVirtualUse
 import com.atlassian.performance.tools.jiraactions.ActionType
 import com.atlassian.performance.tools.jiraactions.scenario.Scenario
 import com.atlassian.performance.tools.report.*
-import com.atlassian.performance.tools.workspace.RootWorkspace
-import com.atlassian.performance.tools.workspace.TestWorkspace
+import com.atlassian.performance.tools.workspace.api.RootWorkspace
+import com.atlassian.performance.tools.workspace.api.TestWorkspace
 import com.google.common.util.concurrent.ThreadFactoryBuilder
 import java.io.File
 import java.nio.file.Path

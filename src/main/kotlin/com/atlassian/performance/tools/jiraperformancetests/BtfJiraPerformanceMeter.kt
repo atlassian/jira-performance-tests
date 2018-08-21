@@ -5,7 +5,7 @@ import com.atlassian.performance.tools.infrastructure.virtualusers.VirtualUsers
 import com.atlassian.performance.tools.jiraactions.MergingActionMetricsParser
 import com.atlassian.performance.tools.jirasoftwareactions.JiraSoftwareScenario
 import com.atlassian.performance.tools.report.*
-import com.atlassian.performance.tools.workspace.git.GitRepo
+import com.atlassian.performance.tools.workspace.api.git.GitRepo
 import java.net.URI
 import java.nio.file.Path
 

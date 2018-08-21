@@ -2,7 +2,7 @@ package com.atlassian.performance.tools.jiraperformancetests
 
 import com.atlassian.performance.tools.infrastructure.VisitableJira
 import com.atlassian.performance.tools.io.ensureParentDirectory
-import com.atlassian.performance.tools.workspace.RootWorkspace
+import com.atlassian.performance.tools.workspace.api.RootWorkspace
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import javax.json.Json

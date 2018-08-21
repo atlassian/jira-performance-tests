@@ -9,7 +9,7 @@ import com.atlassian.performance.tools.jiraactions.scenario.Scenario
 import com.atlassian.performance.tools.report.BaselineComparingJudge
 import com.atlassian.performance.tools.report.Criteria
 import com.atlassian.performance.tools.report.IndependentCohortsJudge
-import com.atlassian.performance.tools.workspace.TestWorkspace
+import com.atlassian.performance.tools.workspace.api.TestWorkspace
 import java.io.File
 import java.nio.file.Path
 import java.nio.file.Paths

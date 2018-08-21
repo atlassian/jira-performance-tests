@@ -1,7 +1,7 @@
 package com.atlassian.performance.tools.jiraperformancetests
 
-import com.atlassian.performance.tools.workspace.TaskWorkspace
-import com.atlassian.performance.tools.workspace.TestWorkspace
+import com.atlassian.performance.tools.workspace.api.TaskWorkspace
+import com.atlassian.performance.tools.workspace.api.TestWorkspace
 import org.apache.logging.log4j.CloseableThreadContext
 
 abstract class GroupableTest(

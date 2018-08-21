@@ -3,8 +3,8 @@ package com.atlassian.performance.tools.jiraperformancetests
 import com.atlassian.performance.tools.awsinfrastructure.CustomDatasetSource
 import com.atlassian.performance.tools.awsinfrastructure.Infrastructure
 import com.atlassian.performance.tools.io.ensureParentDirectory
-import com.atlassian.performance.tools.workspace.RootWorkspace
-import com.atlassian.performance.tools.workspace.TaskWorkspace
+import com.atlassian.performance.tools.workspace.api.RootWorkspace
+import com.atlassian.performance.tools.workspace.api.TaskWorkspace
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import java.io.File

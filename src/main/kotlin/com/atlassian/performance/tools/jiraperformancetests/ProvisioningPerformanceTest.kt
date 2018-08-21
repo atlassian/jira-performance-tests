@@ -7,7 +7,7 @@ import com.atlassian.performance.tools.io.ensureDirectory
 import com.atlassian.performance.tools.jiraactions.MergingActionMetricsParser
 import com.atlassian.performance.tools.jiraactions.scenario.Scenario
 import com.atlassian.performance.tools.report.*
-import com.atlassian.performance.tools.workspace.TestWorkspace
+import com.atlassian.performance.tools.workspace.api.TestWorkspace
 import org.apache.logging.log4j.CloseableThreadContext
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
