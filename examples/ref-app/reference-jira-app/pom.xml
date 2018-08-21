@@ -112,6 +112,7 @@
                         </dependency>
                     </scannedDependencies>
                     <verbose>false</verbose>
+                    <includeExclude>-com.atlassian.plugin.spring.scanner.annotation.*</includeExclude>
                 </configuration>
             </plugin>
         </plugins>
