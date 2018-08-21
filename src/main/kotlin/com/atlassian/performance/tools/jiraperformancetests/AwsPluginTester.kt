@@ -79,7 +79,7 @@ class AwsPluginTester(
                 shadowJar = shadowJar
             )
             val experimentTest = provisioningTest(
-                cohort = baselineApp.getLabel(),
+                cohort = experimentApp.getLabel(),
                 jira = standalone(
                     jiraVersion,
                     dataset,
