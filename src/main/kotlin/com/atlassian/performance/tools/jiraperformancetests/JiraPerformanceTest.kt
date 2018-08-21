@@ -6,8 +6,10 @@ import com.atlassian.performance.tools.infrastructure.Dataset
 import com.atlassian.performance.tools.infrastructure.app.AppSource
 import com.atlassian.performance.tools.jiraactions.ActionType
 import com.atlassian.performance.tools.jiraactions.scenario.Scenario
+import com.atlassian.performance.tools.report.BaselineComparingJudge
 import com.atlassian.performance.tools.report.Criteria
-import com.atlassian.performance.tools.report.RelativeTypicalPerformanceJudge
+import com.atlassian.performance.tools.report.IndependentCohortsJudge
+import com.atlassian.performance.tools.workspace.TestWorkspace
 import java.io.File
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -45,15 +47,18 @@ class JiraPerformanceTest @JvmOverloads constructor(
     }
 
     fun assertNoRegression(results: Results) {
-        RelativeTypicalPerformanceJudge()
-            .judge(
-                results.baselineResults.criteria.getCenterCriteria(),
-                results.baselineResults.actionStats,
-                results.experimentResults.actionStats
-            ).assertAccepted(
-                this.javaClass.canonicalName,
-                outputDirectory.resolve("surefire-reports"),
-                1
-            )
+        val workspace = outputDirectory.resolve("surefire-reports")
+        val verdict = IndependentCohortsJudge().judge(
+            results = listOf(results.baselineResults, results.experimentResults),
+            report = TestWorkspace(workspace)
+        ) + BaselineComparingJudge().judge(
+            baseline = results.baselineResults,
+            experiment = results.experimentResults
+        )
+        verdict.assertAccepted(
+            this.javaClass.canonicalName,
+            workspace,
+            12
+        )
     }
 }
