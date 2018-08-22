@@ -32,6 +32,13 @@ fun log4j(
     "org.apache.logging.log4j:log4j-$module:2.10.0"
 }
 
+task<Exec>("testRefApp") {
+    dependsOn("publishToMavenLocal")
+    workingDir("examples/ref-app")
+    executable("$workingDir/mvnw")
+    args("install", "-Djpt.version=$version")
+}
+
 task<Wrapper>("wrapper") {
     gradleVersion = "4.9"
     distributionType = Wrapper.DistributionType.ALL

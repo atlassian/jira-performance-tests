@@ -91,11 +91,12 @@
         <dependency>
             <groupId>com.atlassian.performance.tools</groupId>
             <artifactId>jira-performance-tests</artifactId>
-            <version>0.0.2</version>
+            <version>${jpt.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
     <properties>
+        <jpt.version>0.0.2</jpt.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 </project>
