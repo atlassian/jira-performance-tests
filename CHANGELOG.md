@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 - Correctly label the experiment test cohort.
 - Distinguish between cohorts even if we test the same version of a plugin.
+- Allow tests to consume custom datasets created within the same task.
 
 ## [0.0.2] - 2018-08-08
 [0.0.2]: https://bitbucket.org/atlassian/jira-performance-tests/branches/compare/release-0.0.2%0Drelease-0.0.1

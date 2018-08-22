@@ -41,7 +41,7 @@ class CustomDatasetSourceRegistry(
     }
 
     fun load(): CustomDatasetSource? = workspace
-        .listPreviousTasks()
+        .listTasks()
         .sortedByDescending { it.directory.getCreationTime() }
         .asSequence()
         .mapNotNull { extractSource(it) }

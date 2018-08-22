@@ -8,7 +8,7 @@ plugins {
 dependencies {
     listOf(
         "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlinVersion",
-        "com.atlassian.performance.tools:workspace:[1.0.0,2.0.0)",
+        "com.atlassian.performance.tools:workspace:[1.1.0,2.0.0)",
         "com.atlassian.performance.tools:report:0.0.2",
         "com.atlassian.performance.tools:aws-resources:0.0.1",
         "com.atlassian.performance.tools:infrastructure:0.1.0",
