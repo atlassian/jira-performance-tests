@@ -5,6 +5,7 @@ import com.atlassian.performance.tools.referencejiraapp.scenario.MyScenario;
 import com.atlassian.performance.tools.aws.Aws;
 import com.atlassian.performance.tools.infrastructure.app.AppSource;
 import com.atlassian.performance.tools.infrastructure.app.MavenApp;
+import com.atlassian.performance.tools.infrastructure.app.NoApp;
 import com.atlassian.performance.tools.jiraactions.ActionType;
 import com.atlassian.performance.tools.jiraactions.ActionTypes;
 import com.atlassian.performance.tools.jiraperformancetests.JiraPerformanceTest;
@@ -32,12 +33,12 @@ public class SlowEventListenerPerformanceIT {
     );
 
     @Test
-    public void shouldNotBeSlowerThanBaseline() {
+    public void shouldNotSlowJiraDown() {
         // given
         final String groupId = "com.atlassian.performance.tools";
         final String artifactId = "reference-jira-app";
         final AppSource experimentApp = new MavenApp(groupId, artifactId, "1.0-SNAPSHOT");
-        final AppSource baselineApp = new MavenApp(groupId, artifactId, "1.0-SNAPSHOT");
+        final AppSource baselineApp = new NoApp();
 
         final File testFatJar = new File("target/reference-jira-app-performance-tests-1.0-SNAPSHOT-fat-tests.jar");
 
