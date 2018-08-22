@@ -57,8 +57,7 @@ class JiraPerformanceTest @JvmOverloads constructor(
         )
         verdict.assertAccepted(
             this.javaClass.canonicalName,
-            workspace,
-            12
+            workspace
         )
     }
 }

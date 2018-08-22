@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 [Unreleased]: https://bitbucket.org/atlassian/jira-performance-tests/branches/compare/master%0Drelease-0.0.3
 
+### Fixed
+- Expected report count assertion
+
 ## [0.0.3]
 [0.0.3]: https://bitbucket.org/atlassian/jira-performance-tests/branches/compare/release-0.0.3%0Drelease-0.0.2
 
