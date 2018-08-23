@@ -36,6 +36,7 @@ task<Exec>("testRefApp") {
     dependsOn("publishToMavenLocal")
     workingDir("examples/ref-app")
     executable("$workingDir/mvnw")
+    environment("MAVEN_OPTS", "-Djansi.force=true")
     args("install", "-Djpt.version=$version")
 }
 
