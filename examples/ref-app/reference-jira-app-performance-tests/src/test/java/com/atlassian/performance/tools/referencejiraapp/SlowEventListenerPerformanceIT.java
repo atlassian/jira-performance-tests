@@ -1,6 +1,7 @@
 package com.atlassian.performance.tools.referencejiraapp;
 
 import com.amazonaws.auth.STSAssumeRoleSessionCredentialsProvider.Builder;
+import com.atlassian.performance.tools.jiraperformancetests.DataCenterAwsDeployment;
 import com.atlassian.performance.tools.referencejiraapp.scenario.MyScenario;
 import com.atlassian.performance.tools.aws.Aws;
 import com.atlassian.performance.tools.infrastructure.app.AppSource;
@@ -59,7 +60,8 @@ public class SlowEventListenerPerformanceIT {
                 experimentApp,
                 baselineApp,
                 "7.2.12",
-                ofMinutes(10)
+                ofMinutes(10),
+                new DataCenterAwsDeployment(2)
         );
 
         // then
