@@ -1,2 +1,2 @@
-[*.xml]
+[*.{java,xml}]
 indent_size = 4

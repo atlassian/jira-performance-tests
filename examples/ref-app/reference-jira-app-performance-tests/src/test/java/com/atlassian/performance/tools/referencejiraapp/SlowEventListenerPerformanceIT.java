@@ -1,13 +1,9 @@
 package com.atlassian.performance.tools.referencejiraapp;
 
-import com.amazonaws.auth.STSAssumeRoleSessionCredentialsProvider.Builder;
-import com.atlassian.performance.tools.aws.Aws;
 import com.atlassian.performance.tools.infrastructure.api.app.MavenApp;
 import com.atlassian.performance.tools.jiraperformancetests.AppImpactTest;
+import com.atlassian.performance.tools.referencejiraapp.aws.MyAws;
 import org.junit.Test;
-
-import static com.amazonaws.regions.Regions.EU_WEST_1;
-import static java.util.UUID.randomUUID;
 
 public class SlowEventListenerPerformanceIT {
 
@@ -19,15 +15,7 @@ public class SlowEventListenerPerformanceIT {
                 "reference-jira-app",
                 "1.0-SNAPSHOT"
         );
-        // Point this towards your AWS setup.
-        final Aws aws = new Aws(
-                EU_WEST_1,
-                new Builder(
-                        "arn:aws:iam::695067801333:role/JPT",
-                        "api-tests-" + randomUUID()
-                ).build()
-        );
-        final AppImpactTest test = new AppImpactTest(app, aws);
+        final AppImpactTest test = new AppImpactTest(app, new MyAws().aws);
 
 //        /*
 //         * Optionally, express your performance impact expectations here. Uncomment it and fix imports if you wish.
