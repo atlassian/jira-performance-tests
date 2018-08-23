@@ -31,9 +31,15 @@ class JiraPerformanceTest @JvmOverloads constructor(
         experimentApp: AppSource,
         baselineApp: AppSource,
         jiraVersion: String = "7.5.0",
-        duration: Duration = Duration.ofMinutes(20)
+        duration: Duration = Duration.ofMinutes(20),
+        deployment: AwsJiraDeployment = StandaloneAwsDeployment()
     ): Results {
-        val pluginTester = AwsPluginTester(aws, dataset, outputDirectory)
+        val pluginTester = AwsPluginTester(
+            aws = aws,
+            dataset = dataset,
+            outputDirectory = outputDirectory,
+            deployment = deployment
+        )
 
         return pluginTester.run(
             testJar,

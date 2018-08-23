@@ -27,7 +27,8 @@ import java.util.concurrent.Executors
 class AwsPluginTester(
     private val aws: Aws,
     private val dataset: Dataset,
-    outputDirectory: Path
+    outputDirectory: Path,
+    private val deployment: AwsJiraDeployment
 ) {
     private val root: RootWorkspace = RootWorkspace(outputDirectory)
     private val label = "Plugin Test"
@@ -71,7 +72,7 @@ class AwsPluginTester(
             val baselineLabel = baselineApp.getLabel()
             val baselineTest = provisioningTest(
                 cohort = baselineLabel,
-                jira = standalone(
+                jira = formula(
                     jiraVersion,
                     dataset,
                     Apps(listOf(baselineApp))
@@ -88,7 +89,7 @@ class AwsPluginTester(
 
             val experimentTest = provisioningTest(
                 cohort = experimentCohort,
-                jira = standalone(
+                jira = formula(
                     jiraVersion,
                     dataset,
                     Apps(listOf(experimentApp))
@@ -171,11 +172,11 @@ class AwsPluginTester(
         aws = aws
     )
 
-    private fun standalone(
+    private fun formula(
         jiraVersion: String,
         dataset: Dataset,
         apps: Apps
-    ) = StandaloneFormula(
+    ) = deployment.createJiraFormula(
         apps = apps,
         application = JiraSoftwareStorage(jiraVersion),
         jiraHomeSource = dataset.jiraHomeSource,
