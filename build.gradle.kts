@@ -37,7 +37,7 @@ task<Exec>("testRefApp") {
     workingDir("examples/ref-app")
     executable("$workingDir/mvnw")
     environment("MAVEN_OPTS", "-Djansi.force=true")
-    args("install", "-Djpt.version=$version")
+    args("install", "-Djpt.version=$version", "-U")
 }
 
 task<Wrapper>("wrapper") {
