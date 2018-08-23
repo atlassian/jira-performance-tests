@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 [Unreleased]: https://bitbucket.org/atlassian/jira-performance-tests/branches/compare/master%0Drelease-0.0.3
 
+### Changed
+- Reshape `JiraPerformanceTest` into `AppImpactTest`.
+
 ### Added
 - Choose deployment for Jira and number of nodes for DC
 

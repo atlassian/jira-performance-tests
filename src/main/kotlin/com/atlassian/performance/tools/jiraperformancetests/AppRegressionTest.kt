@@ -18,13 +18,13 @@ import java.time.Duration
 /**
  * High level api for plugin's tests
  */
-class JiraPerformanceTest @JvmOverloads constructor(
+class AppRegressionTest @JvmOverloads constructor(
     private val aws: Aws,
     private val dataset: Dataset = DatasetCatalogue().largeJira(),
     private val outputDirectory: Path = Paths.get("target")
 ) {
     @JvmOverloads
-    fun runRegressionTest(
+    fun run(
         testJar: File,
         scenario: Class<out Scenario>,
         criteria: Map<ActionType<*>, Criteria>,
