@@ -4,18 +4,14 @@ import com.atlassian.performance.tools.aws.Aws
 import com.atlassian.performance.tools.aws.Investment
 import com.atlassian.performance.tools.awsinfrastructure.InfrastructureFormula
 import com.atlassian.performance.tools.awsinfrastructure.jira.JiraFormula
-import com.atlassian.performance.tools.awsinfrastructure.jira.StandaloneFormula
 import com.atlassian.performance.tools.awsinfrastructure.storage.JiraSoftwareStorage
 import com.atlassian.performance.tools.awsinfrastructure.virtualusers.Ec2VirtualUsersFormula
-import com.atlassian.performance.tools.infrastructure.Dataset
-import com.atlassian.performance.tools.infrastructure.app.AppSource
-import com.atlassian.performance.tools.infrastructure.app.Apps
-import com.atlassian.performance.tools.infrastructure.virtualusers.GrowingLoadSchedule
-import com.atlassian.performance.tools.infrastructure.virtualusers.LoadProfile
-import com.atlassian.performance.tools.infrastructure.virtualusers.SshVirtualUsers
-import com.atlassian.performance.tools.jiraactions.ActionType
+import com.atlassian.performance.tools.infrastructure.api.app.AppSource
+import com.atlassian.performance.tools.infrastructure.api.app.Apps
+import com.atlassian.performance.tools.infrastructure.api.dataset.Dataset
+import com.atlassian.performance.tools.infrastructure.api.virtualusers.LoadProfile
+import com.atlassian.performance.tools.infrastructure.api.virtualusers.SshVirtualUsers
 import com.atlassian.performance.tools.jiraactions.scenario.Scenario
-import com.atlassian.performance.tools.report.*
 import com.atlassian.performance.tools.workspace.api.RootWorkspace
 import com.atlassian.performance.tools.workspace.api.TestWorkspace
 import com.google.common.util.concurrent.ThreadFactoryBuilder
@@ -36,20 +32,18 @@ class AwsPluginTester(
     fun run(
         shadowJar: File,
         scenarioClass: Class<out Scenario>,
-        actionCriteria: Map<ActionType<*>, Criteria>,
         baselineApp: AppSource,
         experimentApp: AppSource,
-        duration: Duration,
+        load: LoadProfile,
         jiraVersion: String
-    ): Results {
+    ): RegressionResults {
         val standaloneStabilityTest = RegressionTest(
             dataset,
             shadowJar,
             scenarioClass,
-            actionCriteria,
             baselineApp,
             experimentApp,
-            duration,
+            load,
             jiraVersion
         )
         return standaloneStabilityTest.run(
@@ -61,13 +55,12 @@ class AwsPluginTester(
         private val dataset: Dataset,
         private val shadowJar: File,
         private val scenarioClass: Class<out Scenario>,
-        private val actionCriteria: Map<ActionType<*>, Criteria>,
         private val baselineApp: AppSource,
         private val experimentApp: AppSource,
-        private val duration: Duration,
+        private val load: LoadProfile,
         private val jiraVersion: String
     ) {
-        fun run(workspace: TestWorkspace): Results {
+        fun run(workspace: TestWorkspace): RegressionResults {
             //provisioning
             val baselineLabel = baselineApp.getLabel()
             val baselineTest = provisioningTest(
@@ -107,17 +100,8 @@ class AwsPluginTester(
                     .build()
             )
 
-            val anticipatedLoad = LoadProfile(
-                loadSchedule = GrowingLoadSchedule(
-                    duration = duration,
-                    initialNodes = 1,
-                    finalNodes = 1
-                ),
-                virtualUsersPerNode = 10,
-                seed = 439587345
-            )
-            val futureBaselineResults = baselineTest.runAsync(workspace, executor, anticipatedLoad, scenarioClass)
-            val futureExperimentResults = experimentTest.runAsync(workspace, executor, anticipatedLoad, scenarioClass)
+            val futureBaselineResults = baselineTest.runAsync(workspace, executor, load, scenarioClass)
+            val futureExperimentResults = experimentTest.runAsync(workspace, executor, load, scenarioClass)
 
             /// rest of the test
 
@@ -125,20 +109,10 @@ class AwsPluginTester(
             val rawExperimentResults = futureExperimentResults.get()
             executor.shutdownNow()
 
-            val criteria = PerformanceCriteria(
-                actionCriteria,
-                loadProfile = anticipatedLoad
+            return RegressionResults(
+                baseline = rawBaselineResults,
+                experiment = rawExperimentResults
             )
-
-            val timeline: Timeline = StandardTimeline(anticipatedLoad)
-            val baselineResults = rawBaselineResults.prepareForJudgement(criteria, timeline)
-            val experimentResults = rawExperimentResults.prepareForJudgement(criteria, timeline)
-
-            return Results(
-                baselineResults = baselineResults,
-                experimentResults = experimentResults
-            )
-
         }
     }
 
@@ -183,5 +157,3 @@ class AwsPluginTester(
         database = dataset.database
     )
 }
-
-data class Results(val baselineResults: EdibleResult, val experimentResults: EdibleResult)

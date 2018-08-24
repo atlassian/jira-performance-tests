@@ -2,7 +2,7 @@ package com.atlassian.performance.tools.referencejiraapp;
 
 import com.amazonaws.auth.STSAssumeRoleSessionCredentialsProvider.Builder;
 import com.atlassian.performance.tools.aws.Aws;
-import com.atlassian.performance.tools.infrastructure.app.MavenApp;
+import com.atlassian.performance.tools.infrastructure.api.app.MavenApp;
 import com.atlassian.performance.tools.jiraperformancetests.AppImpactTest;
 import org.junit.Test;
 
@@ -13,7 +13,7 @@ public class SlowEventListenerPerformanceIT {
 
     @Test
     public void shouldNotSlowJiraDown() {
-        //Point this towards your app.
+        // Point this towards your app.
         final MavenApp app = new MavenApp(
                 "com.atlassian.performance.tools",
                 "reference-jira-app",
@@ -34,11 +34,11 @@ public class SlowEventListenerPerformanceIT {
 //         */
 //        final java.util.Map<
 //                com.atlassian.performance.tools.jiraactions.ActionType<?>,
-//                com.atlassian.performance.tools.report.Criteria
+//                com.atlassian.performance.tools.report.api.Criteria
 //                > criteria =
 //                com.google.common.collect.ImmutableMap.of(
 //                        com.atlassian.performance.tools.jiraactions.ActionTypes.CREATE_ISSUE_SUBMIT,
-//                        new com.atlassian.performance.tools.report.Criteria(
+//                        new com.atlassian.performance.tools.report.api.Criteria(
 //                                0.20f,
 //                                12,
 //                                3
@@ -51,17 +51,17 @@ public class SlowEventListenerPerformanceIT {
 //         */
 //        final java.util.Map<
 //                com.atlassian.performance.tools.jiraactions.ActionType<?>,
-//                com.atlassian.performance.tools.report.Criteria
+//                com.atlassian.performance.tools.report.api.Criteria
 //                > criteria =
 //                com.google.common.collect.ImmutableMap.of(
 //                        com.atlassian.performance.tools.jiraactions.ActionTypes.CREATE_ISSUE_SUBMIT,
-//                        new com.atlassian.performance.tools.report.Criteria(
+//                        new com.atlassian.performance.tools.report.api.Criteria(
 //                                0.20f,
 //                                12,
 //                                3
 //                        ),
 //                        com.atlassian.performance.tools.jiraactions.ActionTypes.EDIT_ISSUE,
-//                        new com.atlassian.performance.tools.report.Criteria(
+//                        new com.atlassian.performance.tools.report.api.Criteria(
 //                                0.30f,
 //                                5,
 //                                1
@@ -74,7 +74,7 @@ public class SlowEventListenerPerformanceIT {
 //         * Optionally, pass in your custom user scenario. The default user scenario might not cover
 //         * interactions with your app.
 //         */
-//        test.setScenario(MyScenario.class);
+//        test.setScenario(com.atlassian.performance.tools.referencejiraapp.scenario.MyScenario.class);
 
 //        /*
 //         * Optionally, set Jira version to test against.

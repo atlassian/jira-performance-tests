@@ -2,13 +2,15 @@ package com.atlassian.performance.tools.jiraperformancetests
 
 import com.atlassian.performance.tools.aws.Aws
 import com.atlassian.performance.tools.awsinfrastructure.DatasetCatalogue
-import com.atlassian.performance.tools.infrastructure.Dataset
-import com.atlassian.performance.tools.infrastructure.app.AppSource
+import com.atlassian.performance.tools.infrastructure.api.app.AppSource
+import com.atlassian.performance.tools.infrastructure.api.dataset.Dataset
+import com.atlassian.performance.tools.infrastructure.api.virtualusers.GrowingLoadSchedule
+import com.atlassian.performance.tools.infrastructure.api.virtualusers.LoadProfile
 import com.atlassian.performance.tools.jiraactions.ActionType
 import com.atlassian.performance.tools.jiraactions.scenario.Scenario
-import com.atlassian.performance.tools.report.BaselineComparingJudge
-import com.atlassian.performance.tools.report.Criteria
-import com.atlassian.performance.tools.report.IndependentCohortsJudge
+import com.atlassian.performance.tools.report.api.Criteria
+import com.atlassian.performance.tools.report.api.PerformanceCriteria
+import com.atlassian.performance.tools.report.api.judge.MaximumCoverageJudge
 import com.atlassian.performance.tools.workspace.api.TestWorkspace
 import java.io.File
 import java.nio.file.Path
@@ -21,19 +23,28 @@ import java.time.Duration
 class AppRegressionTest @JvmOverloads constructor(
     private val aws: Aws,
     private val dataset: Dataset = DatasetCatalogue().largeJira(),
-    private val outputDirectory: Path = Paths.get("target")
+    private val outputDirectory: Path = Paths.get("target"),
+    duration: Duration = Duration.ofMinutes(20),
+    private val deployment: AwsJiraDeployment = StandaloneAwsDeployment()
 ) {
+    private val load = LoadProfile(
+        loadSchedule = GrowingLoadSchedule(
+            duration = duration,
+            initialNodes = 1,
+            finalNodes = 1
+        ),
+        virtualUsersPerNode = 10,
+        seed = 439587345
+    )
+
     @JvmOverloads
     fun run(
         testJar: File,
         scenario: Class<out Scenario>,
-        criteria: Map<ActionType<*>, Criteria>,
         experimentApp: AppSource,
         baselineApp: AppSource,
-        jiraVersion: String = "7.5.0",
-        duration: Duration = Duration.ofMinutes(20),
-        deployment: AwsJiraDeployment = StandaloneAwsDeployment()
-    ): Results {
+        jiraVersion: String = "7.5.0"
+    ): RegressionResults {
         val pluginTester = AwsPluginTester(
             aws = aws,
             dataset = dataset,
@@ -44,22 +55,27 @@ class AppRegressionTest @JvmOverloads constructor(
         return pluginTester.run(
             testJar,
             scenario,
-            criteria,
             baselineApp,
             experimentApp,
-            duration,
+            load,
             jiraVersion
         )
     }
 
-    fun assertNoRegression(results: Results) {
+    fun assertNoRegression(
+        results: RegressionResults,
+        criteria: Map<ActionType<*>, Criteria>
+    ) {
         val workspace = outputDirectory.resolve("surefire-reports")
-        val verdict = IndependentCohortsJudge().judge(
-            results = listOf(results.baselineResults, results.experimentResults),
+        val performanceCriteria = PerformanceCriteria(
+            actionCriteria = criteria,
+            loadProfile = load
+        )
+        val verdict = MaximumCoverageJudge().judge(
+            baseline = results.baseline,
+            experiment = results.experiment,
+            criteria = performanceCriteria,
             report = TestWorkspace(workspace)
-        ) + BaselineComparingJudge().judge(
-            baseline = results.baselineResults,
-            experiment = results.experimentResults
         )
         verdict.assertAccepted(
             this.javaClass.canonicalName,

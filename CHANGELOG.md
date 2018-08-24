@@ -11,12 +11,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Reshape `JiraPerformanceTest` into `AppImpactTest`.
 
 ### Added
-- Choose deployment for Jira and number of nodes for DC
+- Choose deployment for Jira and number of nodes for DC.
 
 ### Fixed
-- Expected report count assertion
-- Force update snapshots when running `testRefApp`
-- Hint how to customize the AppImpactTest.
+- Expect a correct report count.
+- Force updating snapshots when running `testRefApp`.
+- Hint how to customize the `AppImpactTest`.
+- Depend on a stable version of APT `infrastructure`.
+- Depend on a stable version of APT `report`.
 
 ## [0.0.3]
 [0.0.3]: https://bitbucket.org/atlassian/jira-performance-tests/branches/compare/release-0.0.3%0Drelease-0.0.2
@@ -45,7 +47,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Migrate high-level test API from [JPT submodule].
 - Add [README.md](README.md).
-- Add [CHANGELOG.md](CHANGELOG.md).
+- Add this changelog.
 - Enable Bitbucket Pipelines.
 
 [JPT submodule]: https://stash.atlassian.com/projects/JIRASERVER/repos/jira-performance-tests/browse/jira-performance-tests?at=24b1522734605e8689a72396917e6080fddb8731

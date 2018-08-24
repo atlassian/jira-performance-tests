@@ -4,10 +4,10 @@ import com.atlassian.performance.tools.awsinfrastructure.jira.DataCenterFormula
 import com.atlassian.performance.tools.awsinfrastructure.jira.JiraFormula
 import com.atlassian.performance.tools.awsinfrastructure.jira.StandaloneFormula
 import com.atlassian.performance.tools.awsinfrastructure.storage.ApplicationStorage
-import com.atlassian.performance.tools.infrastructure.Database
-import com.atlassian.performance.tools.infrastructure.app.Apps
-import com.atlassian.performance.tools.infrastructure.jira.home.JiraHomeSource
-import com.atlassian.performance.tools.infrastructure.jira.nodes.JiraNodeConfig
+import com.atlassian.performance.tools.infrastructure.api.app.Apps
+import com.atlassian.performance.tools.infrastructure.api.database.Database
+import com.atlassian.performance.tools.infrastructure.api.jira.JiraHomeSource
+import com.atlassian.performance.tools.infrastructure.api.jira.JiraNodeConfig
 
 interface AwsJiraDeployment {
 
