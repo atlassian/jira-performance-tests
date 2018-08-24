@@ -1,3 +1,6 @@
+import org.apache.tools.ant.taskdefs.condition.Os.*
+import java.nio.file.Paths
+
 val kotlinVersion = "1.2.30"
 
 plugins {
@@ -34,8 +37,8 @@ fun log4j(
 
 task<Exec>("testRefApp") {
     dependsOn("publishToMavenLocal")
-    workingDir("examples/ref-app")
-    executable("$workingDir/mvnw")
+    workingDir(Paths.get("examples", "ref-app"))
+    executable(Paths.get(workingDir.toString(), if (isFamily(FAMILY_WINDOWS)) "mvnw.cmd" else "mvnw"))
     environment("MAVEN_OPTS", "-Djansi.force=true")
     args("install", "-Djpt.version=$version", "-U")
 }
