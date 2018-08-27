@@ -31,11 +31,12 @@ class ProvisioningPerformanceTest(
         workingDirectory: TestWorkspace,
         executor: ExecutorService,
         loadProfile: LoadProfile,
-        scenarioClass: Class<out Scenario>? = null
+        scenarioClass: Class<out Scenario>? = null,
+        diagnosticsLimit: Int? = null
     ): CompletableFuture<CohortResult> {
         return executor.submitWithLogContext(cohort) {
             CloseableThreadContext.put("cohort", cohort).use {
-                run(workingDirectory, loadProfile, scenarioClass)
+                run(workingDirectory, loadProfile, scenarioClass, diagnosticsLimit)
             }
         }
     }
@@ -43,8 +44,9 @@ class ProvisioningPerformanceTest(
     fun run(
         workingDirectory: TestWorkspace,
         loadProfile: LoadProfile,
-        scenarioClass: Class<out Scenario>? = null
-    ): CohortResult {
+        scenarioClass: Class<out Scenario>? = null,
+        diagnosticsLimit: Int? = null
+        ): CohortResult {
         val workspace = workingDirectory.directory.resolve(cohort).ensureDirectory()
         try {
             val provisionedInfrastructure = infrastructureFormula.provision(workspace)
@@ -52,7 +54,7 @@ class ProvisioningPerformanceTest(
             val resource = provisionedInfrastructure.resource
             val downloadedResults: Path
             try {
-                infrastructure.applyLoad(loadProfile, scenarioClass)
+                infrastructure.applyLoad(loadProfile, scenarioClass, diagnosticsLimit)
             } catch (e: Exception) {
                 logger.error("Failed to test on $infrastructure", e)
                 throw e
