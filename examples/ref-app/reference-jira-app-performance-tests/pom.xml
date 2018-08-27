@@ -79,6 +79,44 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- This plugin is used to run AWS maintenance commands from the command line -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <executions>
+                    <execution>
+                        <id>clean-all-expired</id>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>com.atlassian.performance.tools.referencejiraapp.aws.CleanExpiredCommand</mainClass>
+                            <classpathScope>test</classpathScope>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>list-my-stacks</id>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>com.atlassian.performance.tools.referencejiraapp.aws.ListMyStacksCommand</mainClass>
+                            <classpathScope>test</classpathScope>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>delete-my-stacks</id>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>com.atlassian.performance.tools.referencejiraapp.aws.DeleteMyStacksCommand</mainClass>
+                            <classpathScope>test</classpathScope>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
     <dependencies>
@@ -96,7 +134,7 @@
         </dependency>
     </dependencies>
     <properties>
-        <jpt.version>0.1.0-SNAPSHOT</jpt.version>
+        <jpt.version>0.1.1-SNAPSHOT</jpt.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 </project>

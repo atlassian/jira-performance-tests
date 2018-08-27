@@ -44,8 +44,11 @@ one with the reference app installed and another one without the app. It runs de
 
 ## AWS Account
 
-JPT uses AWS to provision Jira instances. See the Architecture section for more details.
-We estimate it should cost around 5$ (**incomplete** real data) to run a test.
+JPT uses AWS to provision Jira instances. See the Architecture section for more details.  
+We estimate it should cost around 5$ (**incomplete** real data) to run a test.  
+Each performance test automatically cleans up AWS resources after obtaining performance results.  
+In cases when a test was abruptly terminated, run `./mvnw -f reference-jira-app-performance-tests/pom.xml test -DskipTests exec:java@clean-all-expired` from the `examples/ref-app` directory.  
+If you run tests frequently, we recommend running this housekeeping tests periodically, e.g. every 30 minutes.
 
 ## Architecture
 
