@@ -1,5 +1,21 @@
+# Benchmark your Jira
+
+[JPT](../../README.md) helps measure the performance impact of a change on your instance.
+
+## Requirements
+
+ - Test environment (Jira versions from 7.2.0 upwards)
+ - [Google Chrome](https://www.google.com/chrome/) 62-65
+ - [JDK](http://openjdk.java.net/) 8 - 11
+ - [Git](https://git-scm.com/)
+
+## How to start 
 
 ### Setup of your instance
+
+Benchmarks can alter the data on your Jira, so we recommend a dedicated pre-production environment.
+You'll get the most relevant results if you make it as similar to production as possible. As a starting point,
+we recommend effectively copying production, which includes the hardware, software and data.
 
 The testing process, through interacting with your instance will make the following changes:
 
@@ -16,4 +32,83 @@ For most relevant results, it is advised to roll back these changes. In order to
 
 1. restoring data on the instance,
 2. restarting Jira.
+   
+### Run the benchmark
 
+1. Clone the repository
+   
+    ```
+     git clone https://bitbucket.org/atlassian/jira-performance-tests.git
+    ```
+    
+2. Run the benchmark (**incomplete**)
+
+3. Wait for the test to complete, it will take roughly 20 minutes
+
+    JPT will log a simplified report at the end of the test run. You can check:
+     - how many actions have been executed
+     - how many errors occurred
+     - what's the 95th percentile of action's duration 
+
+    ```
+    14:23:49,269 INFO  { Jira benchmark } Plain text report:
+    
+    +---------------------------+---------------+----------+----------------------+
+    | Action name               | sample size   | errors   | 95th percentile [ms] |
+    +---------------------------+---------------+----------+----------------------+
+    | View Issue                | 1735          | 0        | 1522                 |
+    | Browse Projects           | 165           | 0        | 1062                 |
+    | Search with JQL           | 623           | 0        | 9003                 |
+    | View Board                | 283           | 0        | 3570                 |
+    | View Dashboard            | 472           | 0        | 658                  |
+    | Full Edit Issue           | 155           | 0        | 7692                 |
+    | Edit Issue                | 155           | 0        | 2151                 |
+    | Project Summary           | 153           | 0        | 1096                 |
+    | Full Add Comment          | 63            | 0        | 2509                 |
+    | Add Comment               | 63            | 0        | 2005                 |
+    | Browse Boards             | 62            | 0        | 1071                 |
+    | Full Create Issue         | 154           | 0        | 19264                |
+    | Create Issue              | 154           | 0        | 2611                 |
+    +---------------------------+---------------+----------+----------------------+
+    ```
+
+    The test will also generate a detailed report (**incomplete** example) and a chart (**incomplete** example)
+
+4. Restore the previous instance state 
+
+5. Make a change
+
+6. Run the benchmark again
+
+7. Compare results (**incomplete**)
+
+## Diagnose errors
+
+It is very likely that you'll see that some actions are failing. For each error, you should find an error log message.
+Logs are pointing to HTML dump and screenshot.
+
+### Known issues:
+
+1. Issue create/edit screen lacks a required field
+2. A required field has a custom validator
+3. Virtual users do not understand a required field type
+
+All the above problems have the same origin and the same workarounds. Virtual user can't proceed with action if a real user can't.
+A virtual user also does not know customisations. There are three ways to resolve the problem:
+- change the configuration
+
+    For example, add a required field.
+    
+- modify Scenario to skip problematic project/issue
+
+    Look at the Scenario implementations. They contain Actions. Memories share state between actions.
+    You can write own Memory implementation, which omits problematic issues/projects.
+
+- implement custom actions that have better knowledge about your instance's customisations
+    
+    Similarly to the above, you can always create a custom action, which takes care of all the customisations in your Jira instance.  
+ 
+
+The list describes issues we identified while testing JPT on our internal instances.
+If you have a different problem or you don't know how to proceed with the above,
+please [contact us](https://ecosystem.atlassian.net/secure/CreateIssue.jspa?issuetype=1&pid=28139).  

@@ -16,7 +16,7 @@ one with the reference app installed and another one without the app. It runs de
 1. Clone the repository
 
     ```
-    git clone git@bitbucket.org:atlassian/jira-performance-tests.git
+    git clone https://bitbucket.org/atlassian/jira-performance-tests.git
     ```
 
 2. Open the maven project located in `examples/ref-app` directory in an IDE of your choice
@@ -30,7 +30,7 @@ one with the reference app installed and another one without the app. It runs de
     TODO example console report
     ```
 
-    The test will also generate detailed a detailed report (**incomplete** example) and a chart (**incomplete** example)
+    The test will also generate a detailed report (**incomplete** example) and a chart (**incomplete** example)
  
 6. You can modify (**incomplete** link) test to check if it works with your app.
     - you can point to your app by (**incomplete**)
