@@ -26,9 +26,7 @@ one with the reference app installed and another one without the app. It runs de
  
     In the end, you should see a simple report with results
 
-    ```
-    TODO example console report
-    ```
+    ![Plain text report](plain-text-report.png)
 
     The test will also generate a detailed report (**incomplete** example) and a chart (**incomplete** example)
  

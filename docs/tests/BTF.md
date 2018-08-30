@@ -50,27 +50,7 @@ For most relevant results, it is advised to roll back these changes. In order to
      - how many errors occurred
      - what's the 95th percentile of action's duration 
 
-    ```
-    14:23:49,269 INFO  { Jira benchmark } Plain text report:
-    
-    +---------------------------+---------------+----------+----------------------+
-    | Action name               | sample size   | errors   | 95th percentile [ms] |
-    +---------------------------+---------------+----------+----------------------+
-    | View Issue                | 1735          | 0        | 1522                 |
-    | Browse Projects           | 165           | 0        | 1062                 |
-    | Search with JQL           | 623           | 0        | 9003                 |
-    | View Board                | 283           | 0        | 3570                 |
-    | View Dashboard            | 472           | 0        | 658                  |
-    | Full Edit Issue           | 155           | 0        | 7692                 |
-    | Edit Issue                | 155           | 0        | 2151                 |
-    | Project Summary           | 153           | 0        | 1096                 |
-    | Full Add Comment          | 63            | 0        | 2509                 |
-    | Add Comment               | 63            | 0        | 2005                 |
-    | Browse Boards             | 62            | 0        | 1071                 |
-    | Full Create Issue         | 154           | 0        | 19264                |
-    | Create Issue              | 154           | 0        | 2611                 |
-    +---------------------------+---------------+----------+----------------------+
-    ```
+    ![Plain text report](plain-text-report.png)
 
     The test will also generate a detailed report (**incomplete** example) and a chart (**incomplete** example)
 
