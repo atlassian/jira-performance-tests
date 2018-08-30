@@ -24,7 +24,10 @@ one with the reference app installed and another one without the app. It runs de
 4. The test will ask for AWS credentials (**incomplete** You can implement AWS auth)
 5. It takes 30 - 40 minutes to complete
  
-    In the end, you should see a simple report with results
+    JPT will log a simplified report at the end of the test run. You can check:
+     - how many actions have been executed
+     - how many errors occurred
+     - what's the 95th percentile of action's duration 
 
     ![Plain text report](plain-text-report.png)
 
