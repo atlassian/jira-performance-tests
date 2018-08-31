@@ -14,17 +14,12 @@ import java.nio.file.Path
 /**
  * Gauges Jira performance, even if Jira is not accessible from the Internet.
  */
+@Deprecated(
+    message = "Do not use.",
+    replaceWith = ReplaceWith(expression = "BtfTest()")
+)
 class BtfJiraPerformanceMeter {
 
-    /**
-     * Runs the test
-     *
-     * @param jira instance address to run the test against
-     * @param virtualUsers to be used for the test
-     * @param loadProfile configuration for the test
-     * @param name of the test
-     * @param workspace location
-     */
     fun run(
         virtualUsers: VirtualUsers,
         virtualUserOptions: VirtualUserOptions,

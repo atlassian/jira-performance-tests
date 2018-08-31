@@ -18,6 +18,9 @@ The API consists of all public Java types from `com.atlassian.performance.tools.
 ## [Unreleased]
 [Unreleased]: https://bitbucket.org/atlassian/jira-performance-tests/branches/compare/master%0Drelease-1.0.0
 
+### Added
+- Add a way to test on premise Jira instance which resolves [JPREF-16](https://ecosystem.atlassian.net/browse/JPERF-16)
+
 ## [1.0.0]
 [1.0.0]: https://bitbucket.org/atlassian/jira-performance-tests/branches/compare/release-1.0.0%0Drelease-0.1.2
 

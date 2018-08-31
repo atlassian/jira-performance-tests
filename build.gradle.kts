@@ -66,7 +66,7 @@ tasks.withType<Test> {
 dependencies {
 
     api("com.atlassian.performance.tools:workspace:[2.0.0,3.0.0)")
-    api("com.atlassian.performance.tools:report:[2.0.0,3.0.0)")
+    api("com.atlassian.performance.tools:report:[2.1.0,3.0.0)")
     api("com.atlassian.performance.tools:infrastructure:[2.1.0,3.0.0)")
 
     listOf(
