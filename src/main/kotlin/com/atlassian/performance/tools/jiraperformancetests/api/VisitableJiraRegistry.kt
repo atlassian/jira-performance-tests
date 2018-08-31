@@ -1,4 +1,4 @@
-package com.atlassian.performance.tools.jiraperformancetests
+package com.atlassian.performance.tools.jiraperformancetests.api
 
 import com.atlassian.performance.tools.io.ensureParentDirectory
 import com.atlassian.performance.tools.workspace.api.RootWorkspace

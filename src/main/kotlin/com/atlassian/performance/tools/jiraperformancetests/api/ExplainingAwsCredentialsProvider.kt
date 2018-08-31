@@ -1,4 +1,4 @@
-package com.atlassian.performance.tools.jiraperformancetests
+package com.atlassian.performance.tools.jiraperformancetests.api
 
 import com.amazonaws.auth.AWSCredentials
 import com.amazonaws.auth.AWSCredentialsProvider

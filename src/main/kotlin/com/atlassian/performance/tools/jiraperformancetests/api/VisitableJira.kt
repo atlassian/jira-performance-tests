@@ -1,4 +1,4 @@
-package com.atlassian.performance.tools.jiraperformancetests
+package com.atlassian.performance.tools.jiraperformancetests.api
 
 import java.net.URI
 import javax.json.Json
