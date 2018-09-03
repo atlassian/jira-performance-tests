@@ -1,11 +1,38 @@
+import com.vanniktech.dependency.graph.generator.DependencyGraphGeneratorExtension
 import org.apache.tools.ant.taskdefs.condition.Os.*
 import java.nio.file.Paths
+import com.vanniktech.dependency.graph.generator.DependencyGraphGeneratorPlugin
+import com.vanniktech.dependency.graph.generator.DependencyGraphGeneratorExtension.Generator
+import guru.nidi.graphviz.attribute.Color
+import guru.nidi.graphviz.attribute.Style
 
 val kotlinVersion = "1.2.30"
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("com.vanniktech:gradle-dependency-graph-generator-plugin:0.5.0")
+    }
+}
 
 plugins {
     kotlin("jvm").version("1.2.30")
     id("com.atlassian.performance.tools.gradle-release").version("0.0.2")
+}
+
+plugins.apply("com.vanniktech.dependency.graph.generator")
+
+val jptDependenciesGenerator = Generator(
+    "jptLibraries",
+    { dependency -> dependency.moduleGroup.startsWith("com.atlassian.performance.tools") },
+    { _ -> true },
+    { node, _ -> node.add(Style.FILLED, Color.rgb("#ffcb2b")) }
+)
+
+configure<DependencyGraphGeneratorExtension> {
+    generators = listOf(jptDependenciesGenerator)
 }
 
 dependencies {
