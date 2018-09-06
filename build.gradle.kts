@@ -19,7 +19,7 @@ buildscript {
 
 plugins {
     kotlin("jvm").version("1.2.30")
-    id("com.atlassian.performance.tools.gradle-release").version("0.0.2")
+    id("com.atlassian.performance.tools.gradle-release").version("0.4.1")
     `java-library`
 }
 
