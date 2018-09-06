@@ -1,11 +1,11 @@
 package com.atlassian.performance.tools.jiraperformancetests.api
 
-import com.atlassian.performance.tools.aws.Aws
+import com.atlassian.performance.tools.aws.api.Aws
 import com.atlassian.performance.tools.infrastructure.api.app.MavenApp
 import com.atlassian.performance.tools.infrastructure.api.app.NoApp
-import com.atlassian.performance.tools.jiraactions.ActionType
-import com.atlassian.performance.tools.jiraactions.scenario.Scenario
-import com.atlassian.performance.tools.jirasoftwareactions.JiraSoftwareScenario
+import com.atlassian.performance.tools.jiraactions.api.ActionType
+import com.atlassian.performance.tools.jiraactions.api.scenario.Scenario
+import com.atlassian.performance.tools.jirasoftwareactions.api.JiraSoftwareScenario
 import com.atlassian.performance.tools.report.api.Criteria
 import java.io.File
 import java.time.Duration

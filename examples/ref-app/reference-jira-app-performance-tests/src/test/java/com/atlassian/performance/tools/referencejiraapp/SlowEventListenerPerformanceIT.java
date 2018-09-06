@@ -1,7 +1,7 @@
 package com.atlassian.performance.tools.referencejiraapp;
 
 import com.atlassian.performance.tools.infrastructure.api.app.MavenApp;
-import com.atlassian.performance.tools.jiraperformancetests.AppImpactTest;
+import com.atlassian.performance.tools.jiraperformancetests.api.AppImpactTest;
 import com.atlassian.performance.tools.referencejiraapp.aws.MyAws;
 import org.junit.Test;
 
@@ -21,11 +21,11 @@ public class SlowEventListenerPerformanceIT {
 //         * Optionally, express your performance impact expectations here. Uncomment it and fix imports if you wish.
 //         */
 //        final java.util.Map<
-//                com.atlassian.performance.tools.jiraactions.ActionType<?>,
+//                com.atlassian.performance.tools.jiraactions.api.ActionType<?>,
 //                com.atlassian.performance.tools.report.api.Criteria
 //                > criteria =
 //                com.google.common.collect.ImmutableMap.of(
-//                        com.atlassian.performance.tools.jiraactions.ActionTypes.CREATE_ISSUE_SUBMIT,
+//                        com.atlassian.performance.tools.jiraactions.api.ActionTypes.CREATE_ISSUE_SUBMIT,
 //                        new com.atlassian.performance.tools.report.api.Criteria(
 //                                0.20f,
 //                                12,
@@ -38,17 +38,17 @@ public class SlowEventListenerPerformanceIT {
 //         * More complex expectations can be expressed by adding new entries to the map like below:
 //         */
 //        final java.util.Map<
-//                com.atlassian.performance.tools.jiraactions.ActionType<?>,
+//                com.atlassian.performance.tools.jiraactions.api.ActionType<?>,
 //                com.atlassian.performance.tools.report.api.Criteria
 //                > criteria =
 //                com.google.common.collect.ImmutableMap.of(
-//                        com.atlassian.performance.tools.jiraactions.ActionTypes.CREATE_ISSUE_SUBMIT,
+//                        com.atlassian.performance.tools.jiraactions.api.ActionTypes.CREATE_ISSUE_SUBMIT,
 //                        new com.atlassian.performance.tools.report.api.Criteria(
 //                                0.20f,
 //                                12,
 //                                3
 //                        ),
-//                        com.atlassian.performance.tools.jiraactions.ActionTypes.EDIT_ISSUE,
+//                        com.atlassian.performance.tools.jiraactions.api.ActionTypes.EDIT_ISSUE,
 //                        new com.atlassian.performance.tools.report.api.Criteria(
 //                                0.30f,
 //                                5,

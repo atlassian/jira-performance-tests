@@ -1,16 +1,16 @@
 package com.atlassian.performance.tools.jiraperformancetests.api
 
-import com.atlassian.performance.tools.aws.Aws
-import com.atlassian.performance.tools.awsinfrastructure.DatasetCatalogue
+import com.atlassian.performance.tools.aws.api.Aws
+import com.atlassian.performance.tools.awsinfrastructure.api.DatasetCatalogue
+import com.atlassian.performance.tools.awsinfrastructure.api.VirtualUsersConfiguration
 import com.atlassian.performance.tools.infrastructure.api.app.AppSource
 import com.atlassian.performance.tools.infrastructure.api.dataset.Dataset
-import com.atlassian.performance.tools.infrastructure.api.virtualusers.GrowingLoadSchedule
-import com.atlassian.performance.tools.infrastructure.api.virtualusers.LoadProfile
-import com.atlassian.performance.tools.jiraactions.ActionType
-import com.atlassian.performance.tools.jiraactions.scenario.Scenario
+import com.atlassian.performance.tools.jiraactions.api.ActionType
+import com.atlassian.performance.tools.jiraactions.api.scenario.Scenario
 import com.atlassian.performance.tools.report.api.Criteria
 import com.atlassian.performance.tools.report.api.PerformanceCriteria
 import com.atlassian.performance.tools.report.api.judge.MaximumCoverageJudge
+import com.atlassian.performance.tools.virtualusers.api.VirtualUserLoad
 import com.atlassian.performance.tools.workspace.api.TestWorkspace
 import java.io.File
 import java.nio.file.Path
@@ -27,14 +27,9 @@ class AppRegressionTest @JvmOverloads constructor(
     duration: Duration = Duration.ofMinutes(20),
     private val deployment: AwsJiraDeployment = StandaloneAwsDeployment()
 ) {
-    private val load = LoadProfile(
-        loadSchedule = GrowingLoadSchedule(
-            duration = duration,
-            initialNodes = 1,
-            finalNodes = 1
-        ),
-        virtualUsersPerNode = 10,
-        seed = 439587345
+    private val load = VirtualUserLoad(
+        ramp = Duration.ZERO,
+        flat = duration
     )
 
     @JvmOverloads
@@ -54,10 +49,12 @@ class AppRegressionTest @JvmOverloads constructor(
 
         return pluginTester.run(
             testJar,
-            scenario,
             baselineApp,
             experimentApp,
-            load,
+            VirtualUsersConfiguration(
+                scenario = scenario,
+                virtualUserLoad = load
+            ),
             jiraVersion
         )
     }
@@ -69,7 +66,7 @@ class AppRegressionTest @JvmOverloads constructor(
         val workspace = outputDirectory.resolve("surefire-reports")
         val performanceCriteria = PerformanceCriteria(
             actionCriteria = criteria,
-            loadProfile = load
+            virtualUserLoad = load
         )
         val verdict = MaximumCoverageJudge().judge(
             baseline = results.baseline,

@@ -134,7 +134,7 @@
         </dependency>
     </dependencies>
     <properties>
-        <jpt.version>0.1.1-SNAPSHOT</jpt.version>
+        <jpt.version>1.0.0-SNAPSHOT</jpt.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 </project>

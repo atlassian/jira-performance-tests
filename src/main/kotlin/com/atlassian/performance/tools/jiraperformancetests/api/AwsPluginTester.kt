@@ -1,17 +1,16 @@
 package com.atlassian.performance.tools.jiraperformancetests.api
 
-import com.atlassian.performance.tools.aws.Aws
-import com.atlassian.performance.tools.aws.Investment
-import com.atlassian.performance.tools.awsinfrastructure.InfrastructureFormula
-import com.atlassian.performance.tools.awsinfrastructure.jira.JiraFormula
-import com.atlassian.performance.tools.awsinfrastructure.storage.JiraSoftwareStorage
-import com.atlassian.performance.tools.awsinfrastructure.virtualusers.Ec2VirtualUsersFormula
+import com.atlassian.performance.tools.aws.api.Aws
+import com.atlassian.performance.tools.aws.api.Investment
+import com.atlassian.performance.tools.awsinfrastructure.api.InfrastructureFormula
+import com.atlassian.performance.tools.awsinfrastructure.api.VirtualUsersConfiguration
+import com.atlassian.performance.tools.awsinfrastructure.api.jira.JiraFormula
+import com.atlassian.performance.tools.awsinfrastructure.api.storage.JiraSoftwareStorage
+import com.atlassian.performance.tools.awsinfrastructure.api.virtualusers.Ec2VirtualUsersFormula
 import com.atlassian.performance.tools.infrastructure.api.app.AppSource
 import com.atlassian.performance.tools.infrastructure.api.app.Apps
 import com.atlassian.performance.tools.infrastructure.api.dataset.Dataset
-import com.atlassian.performance.tools.infrastructure.api.virtualusers.LoadProfile
 import com.atlassian.performance.tools.infrastructure.api.virtualusers.SshVirtualUsers
-import com.atlassian.performance.tools.jiraactions.scenario.Scenario
 import com.atlassian.performance.tools.workspace.api.RootWorkspace
 import com.atlassian.performance.tools.workspace.api.TestWorkspace
 import com.google.common.util.concurrent.ThreadFactoryBuilder
@@ -31,19 +30,17 @@ class AwsPluginTester(
 
     fun run(
         shadowJar: File,
-        scenarioClass: Class<out Scenario>,
         baselineApp: AppSource,
         experimentApp: AppSource,
-        load: LoadProfile,
+        virtualUsersConfiguration: VirtualUsersConfiguration,
         jiraVersion: String
     ): RegressionResults {
         val standaloneStabilityTest = RegressionTest(
             dataset,
             shadowJar,
-            scenarioClass,
+            virtualUsersConfiguration,
             baselineApp,
             experimentApp,
-            load,
             jiraVersion
         )
         return standaloneStabilityTest.run(
@@ -54,10 +51,9 @@ class AwsPluginTester(
     private inner class RegressionTest(
         private val dataset: Dataset,
         private val shadowJar: File,
-        private val scenarioClass: Class<out Scenario>,
+        private val virtualUsersConfiguration: VirtualUsersConfiguration,
         private val baselineApp: AppSource,
         private val experimentApp: AppSource,
-        private val load: LoadProfile,
         private val jiraVersion: String
     ) {
         fun run(workspace: TestWorkspace): RegressionResults {
@@ -100,8 +96,8 @@ class AwsPluginTester(
                     .build()
             )
 
-            val futureBaselineResults = baselineTest.runAsync(workspace, executor, load, scenarioClass)
-            val futureExperimentResults = experimentTest.runAsync(workspace, executor, load, scenarioClass)
+            val futureBaselineResults = baselineTest.runAsync(workspace, executor, virtualUsersConfiguration)
+            val futureExperimentResults = experimentTest.runAsync(workspace, executor, virtualUsersConfiguration)
 
             /// rest of the test
 

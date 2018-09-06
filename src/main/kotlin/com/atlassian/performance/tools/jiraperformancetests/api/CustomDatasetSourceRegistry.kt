@@ -1,8 +1,8 @@
 package com.atlassian.performance.tools.jiraperformancetests.api
 
-import com.atlassian.performance.tools.awsinfrastructure.CustomDatasetSource
-import com.atlassian.performance.tools.awsinfrastructure.Infrastructure
-import com.atlassian.performance.tools.io.ensureParentDirectory
+import com.atlassian.performance.tools.awsinfrastructure.api.CustomDatasetSource
+import com.atlassian.performance.tools.awsinfrastructure.api.Infrastructure
+import com.atlassian.performance.tools.io.api.ensureParentDirectory
 import com.atlassian.performance.tools.workspace.api.RootWorkspace
 import com.atlassian.performance.tools.workspace.api.TaskWorkspace
 import org.apache.logging.log4j.LogManager

@@ -1,17 +1,17 @@
 package com.atlassian.performance.tools.referencejiraapp.scenario;
 
-import com.atlassian.performance.tools.jiraactions.SeededRandom;
-import com.atlassian.performance.tools.jiraactions.WebJira;
-import com.atlassian.performance.tools.jiraactions.action.Action;
-import com.atlassian.performance.tools.jiraactions.action.BrowseProjectsAction;
-import com.atlassian.performance.tools.jiraactions.action.CreateIssueAction;
-import com.atlassian.performance.tools.jiraactions.action.SearchJqlAction;
-import com.atlassian.performance.tools.jiraactions.measure.ActionMeter;
-import com.atlassian.performance.tools.jiraactions.memories.IssueKeyMemory;
-import com.atlassian.performance.tools.jiraactions.memories.adaptive.AdaptiveIssueKeyMemory;
-import com.atlassian.performance.tools.jiraactions.memories.adaptive.AdaptiveJqlMemory;
-import com.atlassian.performance.tools.jiraactions.memories.adaptive.AdaptiveProjectMemory;
-import com.atlassian.performance.tools.jiraactions.scenario.Scenario;
+import com.atlassian.performance.tools.jiraactions.api.SeededRandom;
+import com.atlassian.performance.tools.jiraactions.api.WebJira;
+import com.atlassian.performance.tools.jiraactions.api.action.Action;
+import com.atlassian.performance.tools.jiraactions.api.action.BrowseProjectsAction;
+import com.atlassian.performance.tools.jiraactions.api.action.CreateIssueAction;
+import com.atlassian.performance.tools.jiraactions.api.action.SearchJqlAction;
+import com.atlassian.performance.tools.jiraactions.api.measure.ActionMeter;
+import com.atlassian.performance.tools.jiraactions.api.memories.IssueKeyMemory;
+import com.atlassian.performance.tools.jiraactions.api.memories.adaptive.AdaptiveIssueKeyMemory;
+import com.atlassian.performance.tools.jiraactions.api.memories.adaptive.AdaptiveJqlMemory;
+import com.atlassian.performance.tools.jiraactions.api.memories.adaptive.AdaptiveProjectMemory;
+import com.atlassian.performance.tools.jiraactions.api.scenario.Scenario;
 import com.google.common.collect.ImmutableList;
 import org.jetbrains.annotations.NotNull;
 

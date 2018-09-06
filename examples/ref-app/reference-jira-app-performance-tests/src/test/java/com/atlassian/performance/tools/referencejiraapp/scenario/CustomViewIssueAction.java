@@ -1,10 +1,10 @@
 package com.atlassian.performance.tools.referencejiraapp.scenario;
 
-import com.atlassian.performance.tools.jiraactions.ActionTypes;
-import com.atlassian.performance.tools.jiraactions.WebJira;
-import com.atlassian.performance.tools.jiraactions.action.Action;
-import com.atlassian.performance.tools.jiraactions.measure.ActionMeter;
-import com.atlassian.performance.tools.jiraactions.memories.IssueKeyMemory;
+import com.atlassian.performance.tools.jiraactions.api.ActionTypes;
+import com.atlassian.performance.tools.jiraactions.api.WebJira;
+import com.atlassian.performance.tools.jiraactions.api.action.Action;
+import com.atlassian.performance.tools.jiraactions.api.measure.ActionMeter;
+import com.atlassian.performance.tools.jiraactions.api.memories.IssueKeyMemory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

@@ -1,9 +1,9 @@
 package com.atlassian.performance.tools.jiraperformancetests.api
 
-import com.atlassian.performance.tools.awsinfrastructure.jira.DataCenterFormula
-import com.atlassian.performance.tools.awsinfrastructure.jira.JiraFormula
-import com.atlassian.performance.tools.awsinfrastructure.jira.StandaloneFormula
-import com.atlassian.performance.tools.awsinfrastructure.storage.ApplicationStorage
+import com.atlassian.performance.tools.awsinfrastructure.api.jira.DataCenterFormula
+import com.atlassian.performance.tools.awsinfrastructure.api.jira.JiraFormula
+import com.atlassian.performance.tools.awsinfrastructure.api.jira.StandaloneFormula
+import com.atlassian.performance.tools.awsinfrastructure.api.storage.ApplicationStorage
 import com.atlassian.performance.tools.infrastructure.api.app.Apps
 import com.atlassian.performance.tools.infrastructure.api.database.Database
 import com.atlassian.performance.tools.infrastructure.api.jira.JiraHomeSource

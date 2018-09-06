@@ -1,16 +1,14 @@
 package com.atlassian.performance.tools.jiraperformancetests.api
 
-import com.atlassian.performance.tools.infrastructure.api.virtualusers.LoadProfile
 import com.atlassian.performance.tools.infrastructure.api.virtualusers.VirtualUsers
-import com.atlassian.performance.tools.jiraactions.MergingActionMetricsParser
-import com.atlassian.performance.tools.jirasoftwareactions.JiraSoftwareScenario
+import com.atlassian.performance.tools.jiraactions.api.parser.MergingActionMetricsParser
 import com.atlassian.performance.tools.report.api.FullReport
 import com.atlassian.performance.tools.report.api.StandardTimeline
 import com.atlassian.performance.tools.report.api.parser.MergingNodeCountParser
 import com.atlassian.performance.tools.report.api.parser.SystemMetricsParser
 import com.atlassian.performance.tools.report.api.result.FullCohortResult
+import com.atlassian.performance.tools.virtualusers.api.VirtualUserOptions
 import com.atlassian.performance.tools.workspace.api.TestWorkspace
-import java.net.URI
 import java.nio.file.Path
 
 /**
@@ -28,14 +26,13 @@ class BtfJiraPerformanceMeter {
      * @param workspace location
      */
     fun run(
-        jira: URI,
         virtualUsers: VirtualUsers,
-        loadProfile: LoadProfile,
+        virtualUserOptions: VirtualUserOptions,
         name: String,
         workspace: Path
     ) {
         try {
-            virtualUsers.applyLoad(jira, loadProfile, JiraSoftwareScenario::class.java)
+            virtualUsers.applyLoad(virtualUserOptions)
         } finally {
             virtualUsers.gatherResults()
         }
@@ -46,7 +43,7 @@ class BtfJiraPerformanceMeter {
             systemParser = SystemMetricsParser(),
             nodeParser = MergingNodeCountParser()
         ).prepareForJudgement(
-            timeline = StandardTimeline(loadProfile)
+            timeline = StandardTimeline(virtualUserOptions.virtualUserLoad.total)
         )
         FullReport().dump(
             results = listOf(result),

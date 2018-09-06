@@ -5,8 +5,8 @@ import com.amazonaws.auth.AWSCredentialsProviderChain;
 import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.auth.STSAssumeRoleSessionCredentialsProvider;
 import com.amazonaws.regions.Regions;
-import com.atlassian.performance.tools.aws.Aws;
-import com.atlassian.performance.tools.jiraperformancetests.ExplainingAwsCredentialsProvider;
+import com.atlassian.performance.tools.aws.api.Aws;
+import com.atlassian.performance.tools.jiraperformancetests.api.ExplainingAwsCredentialsProvider;
 
 import static java.util.UUID.randomUUID;
 

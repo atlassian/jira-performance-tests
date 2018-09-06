@@ -1,8 +1,8 @@
 package com.atlassian.performance.tools.jiraperformancetests
 
-import com.atlassian.performance.tools.aws.Aws
-import com.atlassian.performance.tools.aws.ProvisionedStack
-import com.atlassian.performance.tools.aws.currentUser
+import com.atlassian.performance.tools.aws.api.Aws
+import com.atlassian.performance.tools.aws.api.ProvisionedStack
+import com.atlassian.performance.tools.aws.api.currentUser
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import java.time.Duration

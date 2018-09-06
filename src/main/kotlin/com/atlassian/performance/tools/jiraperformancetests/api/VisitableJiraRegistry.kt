@@ -1,6 +1,6 @@
 package com.atlassian.performance.tools.jiraperformancetests.api
 
-import com.atlassian.performance.tools.io.ensureParentDirectory
+import com.atlassian.performance.tools.io.api.ensureParentDirectory
 import com.atlassian.performance.tools.workspace.api.RootWorkspace
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger

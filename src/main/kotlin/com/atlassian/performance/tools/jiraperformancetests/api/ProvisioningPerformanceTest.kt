@@ -1,11 +1,10 @@
 package com.atlassian.performance.tools.jiraperformancetests.api
 
-import com.atlassian.performance.tools.awsinfrastructure.InfrastructureFormula
-import com.atlassian.performance.tools.concurrency.submitWithLogContext
-import com.atlassian.performance.tools.infrastructure.api.virtualusers.LoadProfile
-import com.atlassian.performance.tools.io.ensureDirectory
-import com.atlassian.performance.tools.jiraactions.MergingActionMetricsParser
-import com.atlassian.performance.tools.jiraactions.scenario.Scenario
+import com.atlassian.performance.tools.awsinfrastructure.api.InfrastructureFormula
+import com.atlassian.performance.tools.awsinfrastructure.api.VirtualUsersConfiguration
+import com.atlassian.performance.tools.concurrency.api.submitWithLogContext
+import com.atlassian.performance.tools.io.api.ensureDirectory
+import com.atlassian.performance.tools.jiraactions.api.parser.MergingActionMetricsParser
 import com.atlassian.performance.tools.report.api.parser.MergingNodeCountParser
 import com.atlassian.performance.tools.report.api.parser.SystemMetricsParser
 import com.atlassian.performance.tools.report.api.result.CohortResult
@@ -24,29 +23,24 @@ class ProvisioningPerformanceTest(
     private val infrastructureFormula: InfrastructureFormula<*>,
     private val cohort: String
 ) {
-
     private val logger: Logger = LogManager.getLogger(this::class.java)
 
     fun runAsync(
         workingDirectory: TestWorkspace,
         executor: ExecutorService,
-        loadProfile: LoadProfile,
-        scenarioClass: Class<out Scenario>? = null,
-        diagnosticsLimit: Int? = null
+        virtualUsersConfiguration: VirtualUsersConfiguration
     ): CompletableFuture<CohortResult> {
         return executor.submitWithLogContext(cohort) {
             CloseableThreadContext.put("cohort", cohort).use {
-                run(workingDirectory, loadProfile, scenarioClass, diagnosticsLimit)
+                run(workingDirectory, virtualUsersConfiguration)
             }
         }
     }
 
     fun run(
         workingDirectory: TestWorkspace,
-        loadProfile: LoadProfile,
-        scenarioClass: Class<out Scenario>? = null,
-        diagnosticsLimit: Int? = null
-        ): CohortResult {
+        virtualUsersConfiguration: VirtualUsersConfiguration
+    ): CohortResult {
         val workspace = workingDirectory.directory.resolve(cohort).ensureDirectory()
         try {
             val provisionedInfrastructure = infrastructureFormula.provision(workspace)
@@ -54,7 +48,7 @@ class ProvisioningPerformanceTest(
             val resource = provisionedInfrastructure.resource
             val downloadedResults: Path
             try {
-                infrastructure.applyLoad(loadProfile, scenarioClass, diagnosticsLimit)
+                infrastructure.applyLoad(virtualUsersConfiguration)
             } catch (e: Exception) {
                 logger.error("Failed to test on $infrastructure", e)
                 throw e
