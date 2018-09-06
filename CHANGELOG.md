@@ -19,7 +19,10 @@ The API consists of all public Java types from `com.atlassian.performance.tools.
 [Unreleased]: https://bitbucket.org/atlassian/jira-performance-tests/branches/compare/master%0Drelease-1.0.0
 
 ## [1.0.0]
-[1.0.0]: https://bitbucket.org/atlassian/jira-performance-tests/branches/compare/release-1.0.0%0Drelease-0.1.1
+[1.0.0]: https://bitbucket.org/atlassian/jira-performance-tests/branches/compare/release-1.0.0%0Drelease-0.1.2
+
+## [0.1.2]
+[0.1.2]: https://bitbucket.org/atlassian/jira-performance-tests/branches/compare/release-0.1.2%0Drelease-0.1.1
 
 ### Changed
 - Use stable APIs.
