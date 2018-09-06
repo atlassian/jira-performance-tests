@@ -22,6 +22,9 @@ The API consists of all public Java types from `com.atlassian.performance.tools.
 ### Changed
 - Use stable APIs.
 
+### Added
+- Added `AwsHousekeeping` to the API.
+
 ## [0.1.1]
 [0.1.1]: https://bitbucket.org/atlassian/jira-performance-tests/branches/compare/release-0.1.1%0Drelease-0.1.0
 
