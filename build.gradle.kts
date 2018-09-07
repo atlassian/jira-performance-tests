@@ -78,6 +78,11 @@ dependencies {
     ).plus(
         log4jCore()
     ).forEach { implementation(it) }
+
+    listOf(
+        "junit:junit:4.12",
+        "org.assertj:assertj-core:3.11.0"
+    ).forEach { testCompile(it) }
 }
 
 fun log4jCore(): List<String> = log4j(

@@ -20,7 +20,7 @@ one with the reference app installed and another one without the app. It runs de
     ```
 
 2. Open the maven project located in `examples/ref-app` directory in an IDE of your choice
-3. Run `mvn -f examples/ref-app/pom.xml install` in the main JPT directory
+3. Run `./mvnw install` in `examples/ref-app` directory
 4. The test will ask for AWS credentials (**incomplete** You can implement AWS auth)
 5. It takes 30 - 40 minutes to complete
  
