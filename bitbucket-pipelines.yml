@@ -9,14 +9,6 @@ pipelines:
           - gradlewrapper
         script:
           - bash ./gradlew build
-    - step:
-        name: Publish snapshot
-        caches:
-          - gradle
-          - gradlewrapper
-        trigger: manual
-        script:
-          - bash ./gradlew publish
   branches:
     master:
       - step:
