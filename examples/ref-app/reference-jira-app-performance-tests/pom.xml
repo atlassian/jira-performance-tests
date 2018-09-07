@@ -36,6 +36,7 @@
                 </executions>
                 <configuration>
                     <trimStackTrace>false</trimStackTrace>
+                    <argLine>-Xmx256m -Xms256m</argLine>
                 </configuration>
             </plugin>
             <plugin>
