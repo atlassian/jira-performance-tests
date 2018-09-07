@@ -57,7 +57,7 @@
                         <configuration>
                             <archive>
                                 <manifest>
-                                    <mainClass>com.atlassian.performance.tools.virtualusers.EntryPointKt</mainClass>
+                                    <mainClass>com.atlassian.performance.tools.virtualusers.api.EntryPointKt</mainClass>
                                 </manifest>
                             </archive>
                         </configuration>
@@ -135,7 +135,7 @@
         </dependency>
     </dependencies>
     <properties>
-        <jpt.version>1.0.0</jpt.version>
+        <jpt.version>[1.0.0,2.0.0)</jpt.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 </project>
