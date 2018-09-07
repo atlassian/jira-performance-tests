@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import static java.lang.Thread.sleep;
-import static java.time.Duration.ofSeconds;
+import static java.time.Duration.ofMillis;
 
 @Component
 public class SlowEventListener implements InitializingBean, DisposableBean {
@@ -28,7 +28,7 @@ public class SlowEventListener implements InitializingBean, DisposableBean {
         final Long eventTypeId = issueEvent.getEventTypeId();
         if (eventTypeId.equals(EventType.ISSUE_CREATED_ID)) {
             try {
-                sleep(ofSeconds(1).toMillis());
+                sleep(ofMillis(50).toMillis());
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
