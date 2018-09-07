@@ -1,5 +1,6 @@
 import com.vanniktech.dependency.graph.generator.DependencyGraphGeneratorExtension
 import org.apache.tools.ant.taskdefs.condition.Os.*
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import java.nio.file.Paths
 import com.vanniktech.dependency.graph.generator.DependencyGraphGeneratorPlugin
 import com.vanniktech.dependency.graph.generator.DependencyGraphGeneratorExtension.Generator
@@ -55,6 +56,11 @@ val jptDependenciesGenerator = Generator(
 
 configure<DependencyGraphGeneratorExtension> {
     generators = listOf(jptDependenciesGenerator)
+}
+
+tasks.withType<Test> {
+    testLogging.showStandardStreams = true
+    testLogging.exceptionFormat = TestExceptionFormat.FULL
 }
 
 dependencies {
