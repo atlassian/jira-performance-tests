@@ -1,6 +1,6 @@
 package com.atlassian.performance.tools.referencejiraapp.aws;
 
-import com.atlassian.performance.tools.jiraperformancetests.AwsHousekeeping;
+import com.atlassian.performance.tools.jiraperformancetests.api.AwsHousekeeping;
 
 public class ListMyStacksCommand {
 
