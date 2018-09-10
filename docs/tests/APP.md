@@ -25,6 +25,7 @@ one with the reference app installed and another one without the app. It runs de
 5. It takes 30 - 40 minutes to complete
  
     JPT will log a simplified report at the end of the test run. You can check:
+
      - how many actions have been executed
      - how many errors occurred
      - what's the 95th percentile of action's duration 

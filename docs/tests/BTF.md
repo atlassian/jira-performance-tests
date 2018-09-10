@@ -46,6 +46,7 @@ For most relevant results, it is advised to roll back these changes. In order to
 3. Wait for the test to complete, it will take roughly 20 minutes
 
     JPT will log a simplified report at the end of the test run. You can check:
+
      - how many actions have been executed
      - how many errors occurred
      - what's the 95th percentile of action's duration 
