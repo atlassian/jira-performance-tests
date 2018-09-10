@@ -9,6 +9,8 @@ pipelines:
           - gradlewrapper
         script:
           - bash ./gradlew build
+        artifacts:
+          - examples/ref-app/reference-jira-app-performance-tests/target/**
   branches:
     master:
       - step:
@@ -20,6 +22,8 @@ pipelines:
             - gradlewrapper
           script:
             - bash ./gradlew build
+          artifacts:
+            - examples/ref-app/reference-jira-app-performance-tests/target/**
       - step:
           name: Release project
           services:
