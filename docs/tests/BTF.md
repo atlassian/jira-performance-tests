@@ -1,95 +1,134 @@
-# Benchmark your Jira
+# Benchmark your Jira instance
 
-[JPT](../../README.md) helps measure the performance impact of a change on your instance.
+[JPT](../../README.md) helps you evaluate how well Jira can handle a data set under specific conditions. 
+This is useful for testing how hardware or configuration changes can affect the performance of your Jira instance. 
 
-## Requirements
+JPT tests performance from a user’s perspective by focusing on an instance’s _response time_ to common user actions. 
+Atlassian uses JPT to benchmark the performance of each Jira release, posting the results on [Scaling Jira](https://confluence.atlassian.com/enterprise/scaling-jira-867028644.html).
 
- - Test environment (Jira versions from 7.2.0 upwards)
- - [Google Chrome](https://www.google.com/chrome/) 62-65
- - [JDK](http://openjdk.java.net/) 8 - 11
- - [Git](https://git-scm.com/)
+## How it works
 
-## How to start 
+JPT benchmarks a Jira instance’s performance _remotely_, running the most common user actions multiple times.
+When JPT finishes testing, it reports:
 
-### Setup of your instance
+1. What **user actions** it performed
+2. **How many times** it performed each action
+3. How many times each action resulted in an **error**
+4. The **95th percentile** of all response times for each action
 
-Benchmarks can alter the data on your Jira, so we recommend a dedicated pre-production environment.
-You'll get the most relevant results if you make it as similar to production as possible. As a starting point,
-we recommend effectively copying production, which includes the hardware, software and data.
+At present, JPT supports benchmarking for Jira Software.
 
-The testing process, through interacting with your instance will make the following changes:
+### Data changes to tested instance
 
-1. Globally disable the Rich Text Editor.
-2. Affect the browse history of the tested user (recent issues, recent boards, current JQL search).
-3. Affect data displayed by the Activity Stream.
-4. Create roughly 4 issues per minute, which means roughly 80 issues (with default load settings).
-5. Create roughly 2 comments per minute, which means roughly 30 comments (with default load settings).
-6. Load caches and generate resources for visited pages.
+Keep in mind that these actions will affect the instance’s data set, as Jira will treat JPT traffic just like normal user traffic. 
+These changes include:
 
-The above factors may or may not influence subsequent test results. Depending on actual conditions 400 issues may be negligible to data already contained on the instance. Data growth not exceeding 0.5% can safely be considered negligible.
+ 1. Globally disabling the Rich Text Editor
+ 2. Changes to the browse history of the test user (recent issues, recent boards, and so on)
+ 3. Changes to the data displayed on the Activity Stream
+ 4. Added test issues (with default settings, around 80 issues or 4 issues/min)
+ 5. Added test comments (with default settings, around 30 comments or 2 comments/min)
+ 6. Added cache data and resources for visited pages
 
-For most relevant results, it is advised to roll back these changes. In order to be able to reason from the results, always start the test from the same initial conditions. Preparation of the instance prior to each benchmark should include, but not necessarily be limited to:
+These changes can affect subsequent test results, depending on the actual size of the tested instance and how many times you run JPT.
+In most cases, you can consider data growth under 0.5% as negligible.
 
-1. restoring data on the instance,
-2. restarting Jira.
-   
-### Run the benchmark
+### Requirements
 
-1. Clone the repository
-   
-    ```
-     git clone https://bitbucket.org/atlassian/jira-performance-tests.git
-    ```
-    
-2. Run the benchmark (**incomplete**)
+You can install and run JPT from any system that has:
 
-3. Wait for the test to complete, it will take roughly 20 minutes
+* network access to the target Jira instance
+* [Google Chrome](https://www.google.com/chrome/) 62-65
+* [JDK](http://openjdk.java.net/) 8 - 11
+* [Git](https://git-scm.com/)
+* MacOS or Linux installed
 
-    JPT will log a simplified report at the end of the test run. You can check:
+JPT can benchmark Jira Software 7.2 and up.
 
-     - how many actions have been executed
-     - how many errors occurred
-     - what's the 95th percentile of action's duration 
+## How to use JPT
 
-    ![Plain text report](plain-text-report.png)
+Because of the changes applied by JPT, we recommend that you run it against a _clone_ of your instance (instead of your production Jira instance). This involves:
 
-    The test will also generate a detailed report (**incomplete** example) and a chart (**incomplete** example)
+1. Creating a _test environment_ (hardware or cloud).
+2. Installing Jira on the test environment.
+3. Copying your production Jira instance’s data to the test environment.
+4. Running JPT from a separate system.
 
-4. Restore the previous instance state 
+### Preparing your test environment
 
-5. Make a change
+After installing Jira on your test environment, you can then copy the data from your production Jira instance:
 
-6. Run the benchmark again
+1. [Back up your production Jira as normal](https://confluence.atlassian.com/display/ADMINJIRASERVER/Backing+up+data).
+2. Copy your backup items to the test environment. These include the XML backup and the following [jira-home](https://confluence.atlassian.com/display/ADMINJIRASERVER/Jira+application+home+directory) subdirectories:
+    - _data_
+    - _caches_
+3. [Restore your XML backup to the test environment as normal](https://confluence.atlassian.com/display/ADMINJIRASERVER/Restoring+data+from+an+xml+backup).
 
-7. Compare results (**incomplete**)
+After preparing your clone, create a _snapshot_ of it. Snapshots provide you with identical starting points for multiple test runs, creating more reliable results to compare.
+
+### Configuring virtual user actions
+
+JPT uses _virtual users_ to perform common user actions.
+You can configure those actions to create a more suitable test cases for your app.
+
+To do this, you'll need to create your own test module.
+Use the following modules as a reference:
+
+- https://bitbucket.org/atlassian/jira-actions/src/master/
+- https://bitbucket.org/atlassian/jira-software-actions/src/master/
+
+
+### Running a benchmark with JPT 
+
+Perform the following steps on any computer with network access to your test environment:
+
+1. Clone this repository.
+
+    `git clone https://bitbucket.org/atlassian/jira-performance-tests.git`
+
+2. Open the following JAVA file:
+
+    `src/master/examples/btf-test/src/test/java/com/atlassian/performance/tools/btftest/MyJiraOnPremiseIT.java`
+
+3. Configure the test to target your instance. Provide your instance's URI and admin credentials:
+
+    - `final URI myJira = new URI("http://localhost:8090/jira/");`
+    - `btfTest.setAdminLogin("admin");`
+    - `btfTest.setAdminPassword("admin");`
+
+4. From the same directory, run the benchmark test using the following command:
+
+    `./mvnw verify`
+
+After completing the benchmark test, JPT will print out the results in plaintext:
+
+![Plain text report](plain-text-report.png)
 
 ## Diagnose errors
 
-It is very likely that you'll see that some actions are failing. For each error, you should find an error log message.
-Logs are pointing to HTML dump and screenshot.
+If JPT runs into any errors, it will create a screenshot and HTML dump of the page where the error occurred in:
 
-### Known issues:
+`src/master/examples/btf-test/target/jpt-workspace/`
 
-1. Issue create/edit screen lacks a required field
-2. A required field has a custom validator
-3. Virtual users do not understand a required field type
+Each error dump will have its own subdirectory based on the test's timestamp, for example:
 
-All the above problems have the same origin and the same workarounds. Virtual user can't proceed with action if a real user can't.
-A virtual user also does not know customisations. There are three ways to resolve the problem:
-- change the configuration
+`target/jpt-workspace/2018-09-12T13-54-00.747/virtual-users/local/diagnoses.`
 
-    For example, add a required field.
-    
-- modify Scenario to skip problematic project/issue
+## Known issues
 
-    Look at the Scenario implementations. They contain Actions. Memories share state between actions.
-    You can write own Memory implementation, which omits problematic issues/projects.
+Some Jira customizations, issues, and projects can cause JPT's default test scenario to fail.
+Any workarounds involve re-configuring JPT's test scenario through the following Kotlin file:
 
-- implement custom actions that have better knowledge about your instance's customisations
-    
-    Similarly to the above, you can always create a custom action, which takes care of all the customisations in your Jira instance.  
- 
+  `src/kotlin/com/atlassian/performance/tools/jiraperformancetests/BtfJiraPerformanceMeter.kt`
 
-The list describes issues we identified while testing JPT on our internal instances.
-If you have a different problem or you don't know how to proceed with the above,
-please [contact us](https://ecosystem.atlassian.net/secure/CreateIssue.jspa?issuetype=1&pid=28139).  
+- **Issue:** Issue create/edit screen lacks a _required field_.
+    - **Suggested workaround:** Try adding all required fields to the appropriate screens so that the virtual user can inspect what's going on. Alternatively, remove a required field, or make that field not required.
+
+- **Issue:** JPT consistently fails when it tests specific issues or projects.
+    - **Suggested workaround:** Use custom memory implementations to skip them. The test scenario contains _actions_, and you can share states between actions via memory.
+
+- **Issue:** A Jira customization consistently causes JPT to fail.
+    - **Suggested workaround:** Implement custom actions that address these customizations. Remember, JPT's virtual users cannot perform actions that a real user can't.
+
+If you encounter any new problems, or need help with any of these workarounds,
+please [contact us](https://ecosystem.atlassian.net/secure/CreateIssue.jspa?issuetype=1&pid=28139).  

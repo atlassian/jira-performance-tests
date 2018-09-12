@@ -7,7 +7,7 @@ a report.
 JPT focuses on _user experience_, allowing you to test both front-end and back-end performance simultaneously. Rather than
 using simple HTTP traffic, JPT uses browsers to test end-to-end interactions.
 
-Atlassian maintains and uses JPT to benchmark Jira’s performance each release (see [Scaling Jira](https://confluence.atlassian.com/enterprise/scaling-jira-867028644.html) for details).
+Atlassian maintains and uses JPT to benchmark Jira's performance each release (see [Scaling Jira](https://confluence.atlassian.com/enterprise/scaling-jira-867028644.html) for details).
 If you're an Atlassian developer, you can access their [internal JPT tests](https://stash.atlassian.com/projects/JIRASERVER/repos/jira-performance-tests/browse/README.md)
 using your employee credentials.
 
@@ -21,7 +21,7 @@ using your employee credentials.
   - Uses data-agnostic scenarios
   - Starts with reasonable defaults
   - Gathers system and GC metrics
-  - Supports Jira 7.2 - 7.11
+  - Supports Jira 7.2 and up
   - _(planned)_ Compares Jira with and without plugin installed
   - _(planned)_ Supports Jira 8+
 

@@ -1,57 +1,115 @@
-# App Developer tests
+# Evaluate your app's performance impact
 
-This section describes, how to integrate [JPT](../../README.md) into your app tests.
+[JPT](../../README.md) provides a framework for automating the way you test your apps.
+It’s designed to compare how your app impacts the Jira user experience, comparing the response times of Jira with and without your app installed.
+JPT can automate all aspects of the testing cycle, from provisioning instances, all the way to testing them and collecting performance data.
 
-You can start with a reference app test(**incomplete** link). The test runs two separate Jira instances, 
-one with the reference app installed and another one without the app. It runs default Jira Software scenario.
+Atlassian uses JPT to benchmark each Jira release (posting the results on [Scaling Jira](https://confluence.atlassian.com/enterprise/scaling-jira-867028644.html)),
+and also to test internally-developed apps like [Portfolio for Jira](https://www.atlassian.com/software/jira/portfolio).
+
+## How it works
+
+JPT starts by provisioning two Jira instances in Amazon Web Services (AWS):
+
+* a _baseline_ instance, with no apps installed, and
+* an _experiment_ instance, with your app installed
+
+JPT will then benchmark both instances, running the most common user actions multiple times. When JPT finishes testing either instance, it reports:
+
+1. What **user actions** it performed
+2. **How many times** it performed each action
+3. How many times each action resulted in an **error**
+4. The **95th percentile** of all response times for each action
+
+The _difference_ between both instance's response times will help show you the performance impact of your app.
 
 ## Requirements
 
- - [JDK](http://openjdk.java.net/) 8 - 11
- - [AWS](https://aws.amazon.com/) account (**incomplete** what kind of access/permissions do we need)
- - [Git](https://git-scm.com/)
+You can install and run JPT from any system that has:
 
-## How to start
+* [JDK](http://openjdk.java.net/) 8 - 11
+* [Git](https://git-scm.com/)
+* MacOS or Linux installed
 
-1. Clone the repository
+### Amazon Web Services instances
+
+JPT provisions Jira instances in AWS.
+When you run JPT, you will be prompted for your AWS credentials.
+
+Keep in mind that running JPT's tests will incur AWS usage costs.
+Your own costs may vary depending on the size and resource usage of your app.
+For comparison, running a two-node Jira Software Data Center instance in AWS typically costs around $6 per hour.
+
+## How to use JPT
+
+JPT ships with a reference app, which you will replace with your own.
+From there, JPT can handle the rest of the testing process.
+
+### Preparing JPT for testing
+
+1. Clone the JPT repository:
 
     ```
     git clone https://bitbucket.org/atlassian/jira-performance-tests.git
     ```
 
-2. Open the maven project located in `examples/ref-app` directory in an IDE of your choice
-3. Run `./mvnw install` in `examples/ref-app` directory
-4. The test will ask for AWS credentials (**incomplete** You can implement AWS auth)
-5. It takes 30 - 40 minutes to complete
- 
-    JPT will log a simplified report at the end of the test run. You can check:
+2. This repository ships with a Maven project. Open the following project in your IDE:
 
-     - how many actions have been executed
-     - how many errors occurred
-     - what's the 95th percentile of action's duration 
 
-    ![Plain text report](plain-text-report.png)
+    ```
+    examples/ref-apps/
+    ```
 
-    The test will also generate a detailed report (**incomplete** example) and a chart (**incomplete** example)
- 
-6. You can modify (**incomplete** link) test to check if it works with your app.
-    - you can point to your app by (**incomplete**)
-      - GAV
-      - File (??)
-      - Marketplace link (??)
+3. This Maven project is a reference app. Replace it with your own app.
 
-(**incomplete** it should auto clean AWS instances) 
-(**incomplete** how to clean AWS instances) 
 
-## AWS Account
+### Configuring virtual user actions
 
-JPT uses AWS to provision Jira instances. See the Architecture section for more details.  
-We estimate it should cost around 5$ (**incomplete** real data) to run a test.  
-Each performance test automatically cleans up AWS resources after obtaining performance results.  
-In cases when a test was abruptly terminated, run `./mvnw -f reference-jira-app-performance-tests/pom.xml test -DskipTests exec:java@clean-all-expired` from the `examples/ref-app` directory.  
-If you run tests frequently, we recommend running this housekeeping tests periodically, e.g. every 30 minutes.
 
-## Architecture
+JPT uses _virtual users_ to perform common user actions.
+You can configure those actions to create a more suitable test cases for your app.
 
-(**incomplete** text)
-(**incomplete** diagram)
+To do this, you'll need to create your own test module.
+Use the following modules as a reference:
+
+- https://bitbucket.org/atlassian/jira-actions/src/master/
+- https://bitbucket.org/atlassian/jira-software-actions/src/master/
+
+### Setting your AWS credentials
+
+JPT needs your AWS credentials to provision instances.
+By default, JPT manages AWS credentials through the `com.amazonaws.auth.DefaultAWSCredentialsProviderChain` class.
+
+You can provide your AWS credentials for this class through the following methods:
+
+- Setting the environmental variables `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`, or
+- Setting Java System Properties `aws.accessKeyId` and `aws.secretKey`
+
+For more information about this class (including alternative methods for setting credentials), see [Working with AWS Credentials](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html).
+
+JPT ships with a pre-configured policy for managing AWS access.
+You can view and edit this policy through the [aws-policy.json file](../../aws-policy.json).
+For more information, see [Policies and Permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html).
+
+### Running benchmark tests with JPT
+
+Once you've applied your app and set your AWS credentials, run the following command from the repository's root:
+
+
+```
+cd jira-performance-tests/
+mvn -f examples/ref-app/pom.xml install
+```
+
+Depending on your bandwidth, the entire test (from provisioning to data collection) could take around 45 minutes.
+JPT will display test results for both baseline and experiment instances:
+
+![Plain text report](plain-text-report.png)
+
+JPT will also generate detailed test results and store them under `examples/ref-app/reference-jira-app-performance-tests/target/`:
+
+- `detailed.log`: for detailed test logs.
+- `/jpt-workspace/` subdirectory: contains raw test results for both baseline and experiment instances.
+- `/surefire-reports/` subdirectory: contains detailed results in CSV and HTML formats.
+
+After completing the test, JPT will terminate both instances it provisioned in AWS.
