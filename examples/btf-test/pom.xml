@@ -8,6 +8,16 @@
     <groupId>com.atlassian.performance.tools.btftest</groupId>
     <artifactId>btf-test</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <repositories>
+        <repository>
+            <id>atlassian-public</id>
+            <url>https://packages.atlassian.com/maven/repository/public</url>
+            <releases>
+                <enabled>true</enabled>
+                <checksumPolicy>warn</checksumPolicy>
+            </releases>
+        </repository>
+    </repositories>
     <build>
         <plugins>
             <plugin>
