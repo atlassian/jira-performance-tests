@@ -40,6 +40,10 @@ Keep in mind that running JPT's tests will incur AWS usage costs.
 Your own costs may vary depending on the size and resource usage of your app.
 For comparison, running a two-node Jira Software Data Center instance in AWS typically costs around $6 per hour.
 
+### Windows Compatibility
+
+None of the technologies exclude Windows shell from being used, but there is no Windows compatibility CI employed to protect any compatibility promise. Use at your own risk.
+
 ## How to use JPT
 
 JPT ships with a reference app, which you will replace with your own.

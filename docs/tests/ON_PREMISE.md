@@ -45,6 +45,10 @@ You can install and run JPT from any system that has:
 
 JPT can benchmark Jira Software 7.2 and up.
 
+### Windows Compatibility
+
+None of the technologies exclude Windows shell from being used, but there is no Windows compatibility CI employed to protect any compatibility promise. Use at your own risk.
+
 ## How to use JPT
 
 Because of the changes applied by JPT, we recommend that you run it against a _clone_ of your instance (instead of your production Jira instance). This involves:
