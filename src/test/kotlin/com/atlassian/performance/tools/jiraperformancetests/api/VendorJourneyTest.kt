@@ -1,9 +1,11 @@
 package com.atlassian.performance.tools.jiraperformancetests.api
 
+import com.atlassian.performance.tools.jiraperformancetests.AcceptanceCategory
 import org.assertj.core.api.Assertions.assertThat
 import org.codehaus.plexus.util.Os.FAMILY_WINDOWS
 import org.codehaus.plexus.util.Os.isFamily
 import org.junit.Test
+import org.junit.experimental.categories.Category
 import java.nio.file.Paths
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
@@ -11,6 +13,7 @@ import java.util.concurrent.TimeUnit
 class VendorJourneyTest {
 
     @Test
+    @Category(AcceptanceCategory::class)
     fun shouldRunRefApp() {
         val mvnCommand = if (isFamily(FAMILY_WINDOWS)) "mvnw.cmd" else "./mvnw"
         val mavenPackage = ProcessBuilder(

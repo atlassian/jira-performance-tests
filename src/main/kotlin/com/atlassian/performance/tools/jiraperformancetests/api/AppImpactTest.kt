@@ -1,12 +1,14 @@
 package com.atlassian.performance.tools.jiraperformancetests.api
 
 import com.atlassian.performance.tools.aws.api.Aws
+import com.atlassian.performance.tools.infrastructure.api.app.AppSource
 import com.atlassian.performance.tools.infrastructure.api.app.MavenApp
 import com.atlassian.performance.tools.infrastructure.api.app.NoApp
 import com.atlassian.performance.tools.jiraactions.api.ActionType
 import com.atlassian.performance.tools.jiraactions.api.scenario.Scenario
 import com.atlassian.performance.tools.jirasoftwareactions.api.JiraSoftwareScenario
 import com.atlassian.performance.tools.report.api.Criteria
+import com.atlassian.performance.tools.workspace.api.RootWorkspace
 import java.io.File
 import java.time.Duration
 
@@ -14,10 +16,20 @@ import java.time.Duration
  * Tests the performance impact of the [app].
  */
 class AppImpactTest(
-    private val app: MavenApp,
-    private val aws: Aws
+    private val app: AppSource,
+    private val aws: Aws,
+    var testJar: File
 ) {
-    var testJar: File = File("target/${app.artifactId}-performance-tests-${app.version}-fat-tests.jar")
+
+    constructor(
+        app: MavenApp,
+        aws: Aws
+    ) : this(
+        app = app,
+        aws = aws,
+        testJar = File("target/${app.artifactId}-performance-tests-${app.version}-fat-tests.jar")
+    )
+
     var scenario: Class<out Scenario> = JiraSoftwareScenario::class.java
     var criteria: Map<ActionType<*>, Criteria> = emptyMap()
     var jiraVersion: String = "7.5.0"

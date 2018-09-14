@@ -1,7 +1,7 @@
 pipelines:
   default:
     - step:
-        name: Build project
+        name: Build
         services:
           - jdk
         caches:
@@ -10,11 +10,14 @@ pipelines:
         script:
           - bash ./gradlew build
         artifacts:
+          - build/reports/**
+          - build/test-results/**
+          - target/jpt-workspace/**
           - examples/ref-app/reference-jira-app-performance-tests/target/**
   branches:
     master:
       - step:
-          name: Build project
+          name: Build
           services:
             - jdk
           caches:
@@ -23,9 +26,12 @@ pipelines:
           script:
             - bash ./gradlew build
           artifacts:
+            - build/reports/**
+            - build/test-results/**
+            - target/jpt-workspace/**
             - examples/ref-app/reference-jira-app-performance-tests/target/**
       - step:
-          name: Release project
+          name: Release
           services:
             - jdk
           caches:

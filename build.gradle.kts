@@ -92,13 +92,18 @@ fun log4j(
     "org.apache.logging.log4j:log4j-$module:2.10.0"
 }
 
-task<Exec>("testRefApp") {
-    dependsOn("publishToMavenLocal")
-    workingDir(Paths.get("examples", "ref-app"))
-    executable(Paths.get(workingDir.toString(), if (isFamily(FAMILY_WINDOWS)) "mvnw.cmd" else "mvnw"))
-    environment("MAVEN_OPTS", "-Djansi.force=true")
-    args("install", "-Djpt.version=$version", "-U")
+tasks.getByName("test", Test::class).apply {
+    val shadowJarTask = tasks.getByPath(":reference-virtual-users:shadowJar")
+    dependsOn(shadowJarTask)
+    systemProperty("jpt.virtual-users.shadow-jar", shadowJarTask.outputs.files.files.first())
+    useJUnit {
+        excludeCategories("com.atlassian.performance.tools.jiraperformancetests.AcceptanceCategory")
+    }
 }
+
+val testAcceptance = task<Test>("testAcceptance")
+
+tasks["release"].dependsOn(testAcceptance)
 
 task<Wrapper>("wrapper") {
     gradleVersion = "4.9"

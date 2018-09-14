@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration
+        strict="true"
+        xmlns="http://logging.apache.org/log4j/2.0/config"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+            http://logging.apache.org/log4j/2.0/config
+            https://raw.githubusercontent.com/apache/logging-log4j2/log4j-2.10.0/log4j-core/src/main/resources/Log4j-config.xsd
+        "
+>
+    <Appenders>
+        <Appender name="Console" type="Console">
+            <Layout type="PatternLayout" pattern="%d{ABSOLUTE} %highlight{%-5level} {%X{test}: %X{cohort}} %msg%n"/>
+            <Filters>
+                <Filter type="ThresholdFilter" level="info"/>
+            </Filters>
+        </Appender>
+        <Appender name="JptLog" type="File" fileName="target/jpt-workspace/jpt.log">
+            <Layout type="PatternLayout" pattern="%d{ISO8601}{UTC}Z %-5level %t %X %x [%logger] %msg%n"/>
+        </Appender>
+        <Appender name="AwsLog" type="File" fileName="target/jpt-workspace/aws.log">
+            <Layout type="PatternLayout" pattern="%d{ISO8601}{UTC}Z %-5level %t %X %x [%logger] %msg%n"/>
+        </Appender>
+        <Appender type="Null" name="Nothingness"/>
+    </Appenders>
+    <Loggers>
+        <Logger name="com.atlassian.performance.tools" level="debug">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="JptLog"/>
+        </Logger>
+        <Logger name="com.amazonaws.request" level="debug">
+            <AppenderRef ref="AwsLog"/>
+        </Logger>
+        <Logger name="com.amazonaws.http.AmazonHttpClient" level="debug">
+            <AppenderRef ref="AwsLog"/>
+        </Logger>
+        <Root>
+            <AppenderRef ref="Nothingness"/>
+        </Root>
+    </Loggers>
+</Configuration>

@@ -1,0 +1,3 @@
+package com.atlassian.performance.tools.jiraperformancetests
+
+interface AcceptanceCategory
