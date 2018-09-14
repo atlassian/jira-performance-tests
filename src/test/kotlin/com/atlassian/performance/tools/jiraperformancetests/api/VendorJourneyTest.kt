@@ -5,6 +5,7 @@ import org.codehaus.plexus.util.Os.FAMILY_WINDOWS
 import org.codehaus.plexus.util.Os.isFamily
 import org.junit.Test
 import java.nio.file.Paths
+import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
 class VendorJourneyTest {
@@ -20,24 +21,34 @@ class VendorJourneyTest {
         )
 
         val process = mavenPackage.start()
-        val output = printAndGatherOutput(process)
-        process.waitFor(55, TimeUnit.MINUTES)
-        assertThat(output).contains("BUILD SUCCESS")
+
+        val outputLines = mutableListOf<String>()
+        Executors.newSingleThreadExecutor().submit { printAndGatherOutput(process, outputLines) }
+        val timedOut = process.waitFor(55, TimeUnit.MINUTES).not()
+        process.destroy()
+        val lastFewLinesOfOutput = outputLines.takeLast(12).joinToString(separator = "\n")
+        assertThat(timedOut)
+            .`as`("time out")
+            .isFalse()
+        assertThat(lastFewLinesOfOutput)
+            .`as`("last few lines of output")
+            .contains("BUILD SUCCESS")
     }
 
-    private fun printAndGatherOutput(process: Process): String {
-        val output = mutableListOf<String>()
+    private fun printAndGatherOutput(
+        process: Process,
+        outputLines: MutableList<String>
+    ) {
         process
             .inputStream
             .use { stream ->
                 stream
                     .bufferedReader()
-                    .lines()
+                    .lineSequence()
                     .forEach { line ->
-                        output += line
+                        outputLines += line
                         println(line)
                     }
             }
-        return output.joinToString("\n")
     }
 }
