@@ -58,11 +58,6 @@ configure<DependencyGraphGeneratorExtension> {
     generators = listOf(jptDependenciesGenerator)
 }
 
-tasks.withType<Test> {
-    testLogging.showStandardStreams = true
-    testLogging.exceptionFormat = TestExceptionFormat.FULL
-}
-
 dependencies {
 
     api("com.atlassian.performance.tools:workspace:[2.0.0,3.0.0)")
