@@ -27,7 +27,7 @@ using your employee credentials.
 
 ## Basic use cases
 
-- As a customer, you can **[test the performance of an existing Jira instance](docs/tests/BTF.md)**.
+- As a customer, you can **[test the performance of an existing Jira instance](docs/tests/ON_PREMISE.md)**.
 - As a Jira app developer, you can **[test the performance impact of your app](docs/tests/APP.md)**.
 
 ## Reporting issues

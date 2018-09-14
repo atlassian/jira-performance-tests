@@ -93,8 +93,8 @@ Perform the following steps on any computer with network access to your test env
 3. Configure the test to target your instance. Provide your instance's URI and admin credentials:
 
     - `final URI myJira = new URI("http://localhost:8090/jira/");`
-    - `btfTest.setAdminLogin("admin");`
-    - `btfTest.setAdminPassword("admin");`
+    - `jiraOnPremiseTest.setAdminLogin("admin");`
+    - `jiraOnPremiseTest.setAdminPassword("admin");`
 
 4. From the same directory, run the benchmark test using the following command:
 

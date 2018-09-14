@@ -20,24 +20,24 @@ public class MyJiraOnPremiseIT {
          */
         final URI myJira = new URI("http://localhost:8090/jira/");
 
-        final OnPremisePerformanceTest btfTest = new OnPremisePerformanceTest(myJira);
+        final OnPremisePerformanceTest jiraOnPremiseTest = new OnPremisePerformanceTest(myJira);
 
         /*
          * Set credentials so the test knows how to access your jira.
          */
-        btfTest.setAdminLogin("admin");
-        btfTest.setAdminPassword("admin");
+        jiraOnPremiseTest.setAdminLogin("admin");
+        jiraOnPremiseTest.setAdminPassword("admin");
 
         /*
          * Optionally, set the number of virtual users that will generate the load.
          */
-        btfTest.setVirtualUsers(1);
+        jiraOnPremiseTest.setVirtualUsers(1);
 
         /*
          * Optionally, change the test duration.
          */
-        btfTest.setTestDuration(Duration.ofMinutes(5));
+        jiraOnPremiseTest.setTestDuration(Duration.ofMinutes(5));
 
-        btfTest.run();
+        jiraOnPremiseTest.run();
     }
 }
