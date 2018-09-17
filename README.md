@@ -1,4 +1,4 @@
-# Jira Performance Tests (JPT)
+![picture](docs/JPT-banner@2x.png)
 
 Jira Performance Tests (JPT) is a fully-automated performance benchmarking tool designed for Jira Server and Jira Data Center.
 It can manage all aspects of the testing process -- provisioning a new Jira instance, running performance tests, and generating
