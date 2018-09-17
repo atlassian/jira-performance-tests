@@ -37,7 +37,8 @@ class OnPremisePerformanceTest(
             virtualUserLoad = VirtualUserLoad(
                 virtualUsers = virtualUsers,
                 flat = testDuration
-            )
+            ),
+            diagnosticsLimit = 0
         )
 
         BtfJiraPerformanceMeter().run(

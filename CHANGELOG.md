@@ -25,6 +25,11 @@ The API consists of all public Java types from `com.atlassian.performance.tools.
 [JPREF-84]: https://ecosystem.atlassian.net/browse/JPERF-84
 [JPREF-93]: https://ecosystem.atlassian.net/browse/JPERF-93
 
+### Fixed
+- Works around [JPERF-83].
+
+[JPERF-83]: https://ecosystem.atlassian.net/browse/JPERF-83
+
 ## [1.1.0]
 [1.1.0]: https://bitbucket.org/atlassian/jira-performance-tests/branches/compare/release-1.1.0%0Drelease-1.0.0
 
