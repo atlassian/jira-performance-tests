@@ -39,7 +39,7 @@ You can install and run JPT from any system that has:
 
 * network access to the target Jira instance
 * [Google Chrome](https://www.google.com/chrome/) 62-65
-* [JDK](http://openjdk.java.net/) 8 - 11
+* [JDK](http://openjdk.java.net/) 8 - 11 (Make sure to install JDK, not JRE)
 * [Git](https://git-scm.com/)
 * MacOS or Linux installed
 
@@ -92,7 +92,7 @@ Perform the following steps on any computer with network access to your test env
 
 2. Open the following JAVA file:
 
-    `src/master/examples/btf-test/src/test/java/com/atlassian/performance/tools/btftest/MyJiraOnPremiseIT.java`
+    `jira-performance-tests/examples/btf-test/src/test/java/com/atlassian/performance/tools/btftest/MyJiraOnPremiseIT.java`
 
 3. Configure the test to target your instance. Provide your instance's URI and admin credentials:
 
@@ -100,7 +100,7 @@ Perform the following steps on any computer with network access to your test env
     - `jiraOnPremiseTest.setAdminLogin("admin");`
     - `jiraOnPremiseTest.setAdminPassword("admin");`
 
-4. From the same directory, run the benchmark test using the following command:
+4. From `jira-performance-tests/examples/btf-test` directory, run the benchmark test using the following command:
 
     `./mvnw verify`
 

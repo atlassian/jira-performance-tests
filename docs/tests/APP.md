@@ -27,7 +27,7 @@ The _difference_ between both instance's response times will help show you the p
 
 You can install and run JPT from any system that has:
 
-* [JDK](http://openjdk.java.net/) 8 - 11
+* [JDK](http://openjdk.java.net/) 8 - 11 (Make sure to install JDK, not JRE)
 * [Git](https://git-scm.com/)
 * MacOS or Linux installed
 
@@ -101,8 +101,8 @@ Once you've applied your app and set your AWS credentials, run the following com
 
 
 ```
-cd jira-performance-tests/
-mvn -f examples/ref-app/pom.xml install
+cd jira-performance-tests/examples/ref-app/
+./mvnw install
 ```
 
 Depending on your bandwidth, the entire test (from provisioning to data collection) could take around 45 minutes.
