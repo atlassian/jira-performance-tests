@@ -92,12 +92,6 @@ fun log4j(
     "org.apache.logging.log4j:log4j-$module:2.10.0"
 }
 
-tasks.withType(Test::class.java) {
-    val shadowJarTask = tasks.getByPath(":reference-virtual-users:shadowJar")
-    dependsOn(shadowJarTask)
-    systemProperty("jpt.virtual-users.shadow-jar", shadowJarTask.outputs.files.files.first())
-}
-
 tasks.getByName("test", Test::class).apply {
     useJUnit {
         excludeCategories("com.atlassian.performance.tools.jiraperformancetests.AcceptanceCategory")
@@ -106,6 +100,12 @@ tasks.getByName("test", Test::class).apply {
 
 val testAcceptance = task<Test>("testAcceptance") {
     maxParallelForks = 2
+}
+
+tasks.withType(Test::class.java) {
+    val shadowJarTask = tasks.getByPath(":reference-virtual-users:shadowJar")
+    dependsOn(shadowJarTask)
+    systemProperty("jpt.virtual-users.shadow-jar", shadowJarTask.outputs.files.files.first())
 }
 
 tasks["release"].dependsOn(testAcceptance)
