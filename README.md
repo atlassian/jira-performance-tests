@@ -32,7 +32,7 @@ using your employee credentials.
 
 ## Reporting issues
 
-We track all the changes in a [public issue tracker](https://ecosystem.atlassian.net/secure/RapidBoard.jspa?rapidView=457&projectKey=JPERF).
+We track all the changes in a [public issue tracker](FEEDBACK.md).
 All the suggestions and bug reports are welcome.
 
 ## Contributing

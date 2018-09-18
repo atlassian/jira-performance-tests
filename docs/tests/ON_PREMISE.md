@@ -135,4 +135,4 @@ Any workarounds involve re-configuring JPT's test scenario through the following
     - **Suggested workaround:** Implement custom actions that address these customizations. Remember, JPT's virtual users cannot perform actions that a real user can't.
 
 If you encounter any new problems, or need help with any of these workarounds,
-please [contact us](https://ecosystem.atlassian.net/secure/CreateIssue.jspa?issuetype=1&pid=28139).  
+please [contact us](../../FEEDBACK.md).  
