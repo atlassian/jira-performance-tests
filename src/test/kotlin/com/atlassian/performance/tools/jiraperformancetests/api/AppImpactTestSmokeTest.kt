@@ -49,7 +49,6 @@ class AppImpactTestSmokeTest {
     }
 }
 
-// Consider moving to `aws-infrastructure`.
 private class MarketplaceUriApp(
     private val uri: URI
 ) : AppSource {

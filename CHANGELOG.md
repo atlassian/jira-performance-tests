@@ -19,11 +19,12 @@ The API consists of all public Java types from `com.atlassian.performance.tools.
 [Unreleased]: https://bitbucket.org/atlassian/jira-performance-tests/branches/compare/master%0Drelease-1.1.0
 
 ### Added
-- Add an option to test on premise Jira with custom test scenario, which resolves [JPREF-84].
-- Accept any `AppSource` in `AppImpactTest`. Work around [JPREF-93].
+- Add an option to test on premise Jira with custom test scenario, which resolves [JPERF-84].
+- Accept any `AppSource` in `AppImpactTest`. Work around [JPERF-93].
+- Support testing locally built apps. Work around [JPERF-93].
 
-[JPREF-84]: https://ecosystem.atlassian.net/browse/JPERF-84
-[JPREF-93]: https://ecosystem.atlassian.net/browse/JPERF-93
+[JPERF-84]: https://ecosystem.atlassian.net/browse/JPERF-84
+[JPERF-93]: https://ecosystem.atlassian.net/browse/JPERF-93
 
 ### Fixed
 - Works around [JPERF-83].
@@ -34,7 +35,7 @@ The API consists of all public Java types from `com.atlassian.performance.tools.
 [1.1.0]: https://bitbucket.org/atlassian/jira-performance-tests/branches/compare/release-1.1.0%0Drelease-1.0.0
 
 ### Added
-- Add a way to test on premise Jira instance which resolves [JPREF-16](https://ecosystem.atlassian.net/browse/JPERF-16)
+- Add a way to test on premise Jira instance which resolves [JPERF-16](https://ecosystem.atlassian.net/browse/JPERF-16)
 
 ## [1.0.0]
 [1.0.0]: https://bitbucket.org/atlassian/jira-performance-tests/branches/compare/release-1.0.0%0Drelease-0.1.2

@@ -1,21 +1,22 @@
 package com.atlassian.performance.tools.referencejiraapp;
 
-import com.atlassian.performance.tools.infrastructure.api.app.MavenApp;
+import com.atlassian.performance.tools.infrastructure.api.app.AppSource;
 import com.atlassian.performance.tools.jiraperformancetests.api.AppImpactTest;
+import com.atlassian.performance.tools.jiraperformancetests.api.LocalApp;
 import com.atlassian.performance.tools.referencejiraapp.aws.MyAws;
 import org.junit.Test;
+
+import java.io.File;
 
 public class SlowEventListenerPerformanceIT {
 
     @Test
     public void shouldNotSlowJiraDown() {
-        // Point this towards your app.
-        final MavenApp app = new MavenApp(
-                "com.atlassian.performance.tools",
-                "reference-jira-app",
-                "1.0-SNAPSHOT"
+        final AppSource app = new LocalApp(
+            new File("target/reference-jira-app-1.0-SNAPSHOT.obr")
         );
-        final AppImpactTest test = new AppImpactTest(app, new MyAws().aws);
+        final File virtualUsersJar = new File("target/reference-jira-app-performance-tests-1.0-SNAPSHOT-fat-tests.jar");
+        final AppImpactTest test = new AppImpactTest(app, new MyAws().aws, virtualUsersJar);
 
 //        /*
 //         * Optionally, express your performance impact expectations here. Uncomment it and fix imports if you wish.
