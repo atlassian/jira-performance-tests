@@ -4,7 +4,9 @@ import com.amazonaws.auth.DefaultAWSCredentialsProviderChain
 import com.amazonaws.regions.Regions
 import com.amazonaws.services.support.AWSSupportClientBuilder
 import com.atlassian.performance.tools.aws.api.Aws
+import com.atlassian.performance.tools.aws.api.StorageLocation
 import com.atlassian.performance.tools.aws.api.SupportCapacityMediator
+import com.atlassian.performance.tools.awsinfrastructure.api.DatasetCatalogue
 import com.atlassian.performance.tools.infrastructure.api.app.AppSource
 import com.atlassian.performance.tools.io.api.dereference
 import com.atlassian.performance.tools.jirasoftwareactions.api.JiraSoftwareScenario
@@ -44,6 +46,13 @@ class AppImpactTestSmokeTest {
         )
         test.scenario = JiraSoftwareScenario::class.java
         test.duration = Duration.ofMinutes(1)
+        test.dataset = DatasetCatalogue().custom(
+            label = "700 issues",
+            location = StorageLocation(
+                uri = URI.create("s3://jpt-custom-datasets-storage-a008820-datasetbucket-1sjxdtrv5hdhj/dataset-919767fe-55b5-4c06-a3f4-c1d8222b6a2d"),
+                region = Regions.EU_WEST_1
+            )
+        )
 
         test.run()
     }

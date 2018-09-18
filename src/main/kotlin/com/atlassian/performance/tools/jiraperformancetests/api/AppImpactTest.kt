@@ -1,14 +1,15 @@
 package com.atlassian.performance.tools.jiraperformancetests.api
 
 import com.atlassian.performance.tools.aws.api.Aws
+import com.atlassian.performance.tools.awsinfrastructure.api.DatasetCatalogue
 import com.atlassian.performance.tools.infrastructure.api.app.AppSource
 import com.atlassian.performance.tools.infrastructure.api.app.MavenApp
 import com.atlassian.performance.tools.infrastructure.api.app.NoApp
+import com.atlassian.performance.tools.infrastructure.api.dataset.Dataset
 import com.atlassian.performance.tools.jiraactions.api.ActionType
 import com.atlassian.performance.tools.jiraactions.api.scenario.Scenario
 import com.atlassian.performance.tools.jirasoftwareactions.api.JiraSoftwareScenario
 import com.atlassian.performance.tools.report.api.Criteria
-import com.atlassian.performance.tools.workspace.api.RootWorkspace
 import java.io.File
 import java.time.Duration
 
@@ -34,11 +35,13 @@ class AppImpactTest(
     var criteria: Map<ActionType<*>, Criteria> = emptyMap()
     var jiraVersion: String = "7.5.0"
     var duration: Duration = Duration.ofMinutes(20)
+    internal var dataset: Dataset = DatasetCatalogue().largeJira()
 
     fun run() {
         val test = AppRegressionTest(
             aws = aws,
-            duration = duration
+            duration = duration,
+            dataset = dataset
         )
         val results = test.run(
             testJar = testJar,
