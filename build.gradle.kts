@@ -99,6 +99,8 @@ tasks.getByName("test", Test::class).apply {
 }
 
 val testAcceptance = task<Test>("testAcceptance") {
+    dependsOn("publishToMavenLocal")
+    systemProperty("jpt.version", version)
     maxParallelForks = 2
 }
 

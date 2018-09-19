@@ -16,9 +16,13 @@ class VendorJourneyTest {
     @Category(AcceptanceCategory::class)
     fun shouldRunRefApp() {
         val mvnCommand = if (isFamily(FAMILY_WINDOWS)) "mvnw.cmd" else "./mvnw"
+        val jptVersionProperty = "jpt.version"
+        val jptVersion: String = System.getProperty(jptVersionProperty)
+            ?: throw Exception("`$jptVersionProperty` should be set")
         val mavenPackage = ProcessBuilder(
             mvnCommand,
-            "install"
+            "install",
+            "-Djpt.version=$jptVersion"
         ).directory(
             Paths.get("examples", "ref-app").toFile()
         )
