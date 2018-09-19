@@ -1,9 +1,9 @@
+image: openjdk:8
+
 pipelines:
   default:
     - step:
         name: Smoke test
-        services:
-          - jdk
         caches:
           - gradle
           - gradlewrapper
@@ -17,8 +17,6 @@ pipelines:
           - examples/ref-app/reference-jira-app-performance-tests/target/**
     - step:
         name: Acceptance test
-        services:
-          - jdk
         caches:
           - gradle
           - gradlewrapper
@@ -35,8 +33,6 @@ pipelines:
     master:
       - step:
           name: Acceptance test
-          services:
-            - jdk
           caches:
             - gradle
             - gradlewrapper
@@ -50,8 +46,6 @@ pipelines:
             - examples/ref-app/reference-jira-app-performance-tests/target/**
       - step:
           name: Release
-          services:
-            - jdk
           caches:
             - gradle
             - gradlewrapper
@@ -71,15 +65,9 @@ pipelines:
     aws-housekeeping:
       - step:
           name: AWS housekeeping
-          services:
-            - jdk
           script:
             - cd ./examples/ref-app
             - bash ./mvnw -f reference-jira-app-performance-tests/pom.xml test -DskipTests exec:java@clean-all-expired
 definitions:
   caches:
     gradlewrapper: ~/.gradle/wrapper
-  services:
-    jdk:
-      image: openjdk:8
-      memory: 2048
