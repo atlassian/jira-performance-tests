@@ -13,7 +13,7 @@ public class SlowEventListenerPerformanceIT {
     @Test
     public void shouldNotSlowJiraDown() {
         final AppSource app = new LocalApp(
-            new File("target/reference-jira-app-1.0-SNAPSHOT.obr")
+            new File("../reference-jira-app/target/reference-jira-app-1.0-SNAPSHOT.obr")
         );
         final File virtualUsersJar = new File("target/reference-jira-app-performance-tests-1.0-SNAPSHOT-fat-tests.jar");
         final AppImpactTest test = new AppImpactTest(app, new MyAws().aws, virtualUsersJar);
