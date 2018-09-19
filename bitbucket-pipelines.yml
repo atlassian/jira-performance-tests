@@ -1,7 +1,7 @@
 pipelines:
   default:
     - step:
-        name: Build
+        name: Smoke test
         services:
           - jdk
         caches:
@@ -15,17 +15,33 @@ pipelines:
           - target/jpt-workspace/**
           - target/surefire-reports/**
           - examples/ref-app/reference-jira-app-performance-tests/target/**
+    - step:
+        name: Acceptance test
+        services:
+          - jdk
+        caches:
+          - gradle
+          - gradlewrapper
+        trigger: manual
+        script:
+          - bash ./gradlew testAcceptance
+        artifacts:
+          - build/reports/**
+          - build/test-results/**
+          - target/jpt-workspace/**
+          - target/surefire-reports/**
+          - examples/ref-app/reference-jira-app-performance-tests/target/**
   branches:
     master:
       - step:
-          name: Build
+          name: Acceptance test
           services:
             - jdk
           caches:
             - gradle
             - gradlewrapper
           script:
-            - bash ./gradlew build
+            - bash ./gradlew testAcceptance
           artifacts:
             - build/reports/**
             - build/test-results/**
