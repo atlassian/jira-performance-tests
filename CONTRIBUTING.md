@@ -7,7 +7,11 @@ All the changes are welcome. Please help us to improve code, examples and docume
 
 ## Testing 
 
-(**incomplete** we don't have tests in the repo yet. We plan to use ref-app tests)
+This module's tests require an access to AWS. 
+The credentials should be provided via setting the environmental variables `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`.
+
+To run this module default test suite execute `./gradlew build`. 
+To run the full test suite including acceptance tests execute `./gradlew testAcceptance`.
 
 ## Developer’s Environment
 
@@ -18,9 +22,17 @@ to test the change.
  
 Pull requests, issues and comments are welcome. For pull requests:
 
+  - Create your own [fork] of the repository and raise a pull request targeting master branch in the main repository
+  - Enable Bitbucket pipelines, it is important that you do it via *Settings* menu and not *Pipelines* menu otherwise 
+  Bitbucket will create an empty commit polluting Git history of your fork
+  - Configure Bitbucket pipelines by providing `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` 
+  environment variables with your AWS credentials. This can be done in your [repository settings] in *Pipelines* section
   - Add tests for new features and bug fixes
   - Follow the existing style
   - Separate unrelated changes into multiple pull requests
+  
+[fork]: https://confluence.atlassian.com/bitbucket/forking-a-repository-221449527.html
+[repository settings]: https://confluence.atlassian.com/bitbucket/environment-variables-794502608.html
   
 See the [existing issues](https://ecosystem.atlassian.net/projects/JPERF/issues/?filter=allissues) for things to start contributing.
 
