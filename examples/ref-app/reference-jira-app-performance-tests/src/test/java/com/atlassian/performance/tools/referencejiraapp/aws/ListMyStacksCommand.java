@@ -7,7 +7,7 @@ public class ListMyStacksCommand {
     /**
      * This will list all AWS stacks provisioned by the current user.
      * You can run it manually from IDE or from command line in the examples/ref-app directory:
-     * ./mvnw -f reference-jira-app-performance-tests/pom.xml test -DskipTests exec:java@list-my-stacks
+     * ./mvnw -pl reference-jira-app-performance-tests test-compile exec:java@list-my-stacks
      *
      * Example output:
      * ```

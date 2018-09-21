@@ -67,7 +67,7 @@ pipelines:
           name: AWS housekeeping
           script:
             - cd ./examples/ref-app
-            - bash ./mvnw -f reference-jira-app-performance-tests/pom.xml test -DskipTests exec:java@clean-all-expired
+            - bash ./mvnw -pl reference-jira-app-performance-tests test-compile exec:java@clean-all-expired
 definitions:
   caches:
     gradlewrapper: ~/.gradle/wrapper

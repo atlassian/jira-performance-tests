@@ -7,7 +7,7 @@ public class CleanExpiredCommand {
     /**
      * This will clean all expired stacks and instances for all users.
      * You can run it manually from IDE or from command line in the examples/ref-app directory:
-     * ./mvnw -f reference-jira-app-performance-tests/pom.xml test -DskipTests exec:java@clean-all-expired
+     * ./mvnw -pl reference-jira-app-performance-tests test-compile exec:java@clean-all-expired
      *
      * Example output:
      * ```
