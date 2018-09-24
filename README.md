@@ -22,7 +22,7 @@ using your employee credentials.
   - Starts with reasonable defaults
   - Gathers system and GC metrics
   - Supports Jira 7.2 and up
-  - _(planned)_ Compares Jira with and without plugin installed
+  - Compares Jira with and without plugin installed
   - _(planned)_ Supports Jira 8+
 
 ## Basic use cases
