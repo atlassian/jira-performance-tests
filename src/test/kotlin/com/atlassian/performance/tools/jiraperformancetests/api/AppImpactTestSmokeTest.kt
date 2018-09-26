@@ -33,7 +33,10 @@ class AppImpactTestSmokeTest {
             .withRegion(region)
             .build()
         val test = AppImpactTest(
-            app = MarketplaceUriApp(URI("https://marketplace.atlassian.com/download/apps/1217110/version/1000051")),
+            app = MarketplaceUriApp(
+                uri = URI("https://marketplace.atlassian.com/download/apps/1217110/version/1000051"),
+                label = "Jira training app"
+            ),
             aws = Aws(
                 region = region,
                 credentialsProvider = credentialsProvider,
@@ -59,7 +62,8 @@ class AppImpactTestSmokeTest {
 }
 
 private class MarketplaceUriApp(
-    private val uri: URI
+    private val uri: URI,
+    private val label: String
 ) : AppSource {
 
     override fun acquireFiles(
@@ -81,5 +85,5 @@ private class MarketplaceUriApp(
         return file
     }
 
-    override fun getLabel(): String = uri.toString()
+    override fun getLabel(): String = label
 }

@@ -19,6 +19,9 @@ import java.nio.file.Path
 import java.time.Duration
 import java.util.concurrent.Executors
 
+@Deprecated(
+    message = "Use AppImpactTest or use its source as a guide how to build your custom test"
+)
 class AwsPluginTester(
     private val aws: Aws,
     private val dataset: Dataset,

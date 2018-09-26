@@ -20,6 +20,9 @@ import java.time.Duration
 /**
  * High level api for plugin's tests
  */
+@Deprecated(
+    message = "Use AppImpactTest or use its source as a guide how to build your custom test"
+)
 class AppRegressionTest @JvmOverloads constructor(
     private val aws: Aws,
     private val dataset: Dataset = DatasetCatalogue().largeJira(),
