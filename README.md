@@ -30,10 +30,10 @@ using your employee credentials.
 - As a customer, you can **[test the performance of an existing Jira instance](docs/tests/ON_PREMISE.md)**.
 - As a Jira app developer, you can **[test the performance impact of your app](docs/tests/APP.md)**.
 
-## Reporting issues
+## Feedback
 
-We track all the changes in a [public issue tracker](FEEDBACK.md).
-All the suggestions and bug reports are welcome.
+We welcome all feedback. You can send it our way via our Slack and Jira.
+You can find the details on the [feedback page](FEEDBACK.md).
 
 ## Contributing
 
