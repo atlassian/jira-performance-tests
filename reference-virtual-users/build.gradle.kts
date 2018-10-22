@@ -17,6 +17,7 @@ tasks.getByName("shadowJar", ShadowJar::class).apply {
 
 configurations.all {
     resolutionStrategy {
+        activateDependencyLocking()
         failOnVersionConflict()
         eachDependency {
             when (requested.module.toString()) {
