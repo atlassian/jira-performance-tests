@@ -28,6 +28,7 @@ plugins.apply("com.vanniktech.dependency.graph.generator")
 
 configurations.all {
     resolutionStrategy {
+        activateDependencyLocking()
         failOnVersionConflict()
         eachDependency {
             when (requested.module.toString()) {
