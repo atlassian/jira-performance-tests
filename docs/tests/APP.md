@@ -39,6 +39,10 @@ When you run JPT, you will be prompted for your AWS credentials.
 Keep in mind that running JPT's tests will incur AWS usage costs.
 Your own costs may vary depending on the size and resource usage of your app.
 For comparison, running a two-node Jira Software Data Center instance in AWS typically costs around $6 per hour.
+Although JPT cleans up AWS resources after each test, sometimes test may be terminated abruptly and you can be left with running instances that will incur continuous cost.
+Each JPT instance in AWS is marked with expiry tag, running the following command will clean up all expired instances:  
+Run from the `examples/ref-app` directory: `./mvnw -pl reference-jira-app-performance-tests test-compile exec:java@clean-all-expired`  
+In our own environment we have it run automatically every hour.
 
 ### Windows Compatibility
 
