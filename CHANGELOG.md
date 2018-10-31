@@ -18,6 +18,11 @@ The API consists of all public Java types from `com.atlassian.performance.tools.
 ## [Unreleased]
 [Unreleased]: https://bitbucket.org/atlassian/jira-performance-tests/branches/compare/master%0Drelease-1.2.1
 
+### Added
+- Expose `setAllowInsecureConnections` in `OnPremisePerformanceTest`. Work around [JPERF-196].
+
+[JPERF-196]: https://ecosystem.atlassian.net/browse/JPERF-196
+
 ## [1.2.1] - 2018-10-16
 [1.2.1]: https://bitbucket.org/atlassian/jira-performance-tests/branches/compare/release-1.2.1%0Drelease-1.2.0
 

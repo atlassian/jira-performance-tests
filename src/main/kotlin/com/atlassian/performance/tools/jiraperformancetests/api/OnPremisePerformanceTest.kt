@@ -8,6 +8,7 @@ import com.atlassian.performance.tools.virtualusers.api.VirtualUserOptions
 import com.atlassian.performance.tools.workspace.api.RootWorkspace
 import java.net.URI
 import java.time.Duration
+import java.util.*
 
 /**
  * Gauges Jira performance, even if Jira is not accessible from the Internet.
@@ -24,8 +25,8 @@ class OnPremisePerformanceTest(
     var scenario: Class<out Scenario> = DEFAULTS.scenario
     var virtualUsers: Int = DEFAULTS.virtualUserLoad.virtualUsers
     var testDuration: Duration = Duration.ofMinutes(30)
+    var allowInsecureConnections: Boolean = false
     var workspace: RootWorkspace = RootWorkspace()
-    private val testName = "Benchmark my Jira"
     private val cohortName = "my-jira"
 
     fun run() {
@@ -38,6 +39,9 @@ class OnPremisePerformanceTest(
                 virtualUsers = virtualUsers,
                 flat = testDuration
             ),
+            allowInsecureConnections = allowInsecureConnections,
+            seed = Random().nextLong(),
+            help = false,
             diagnosticsLimit = 0
         )
 
