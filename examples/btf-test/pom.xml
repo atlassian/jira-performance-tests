@@ -61,6 +61,8 @@
                     <systemPropertyVariables>
                         <jpt.workspace.parent>${project.build.directory}</jpt.workspace.parent>
                     </systemPropertyVariables>
+                    <!-- see https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=911925 -->
+                    <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
                     <trimStackTrace>false</trimStackTrace>
                 </configuration>
             </plugin>

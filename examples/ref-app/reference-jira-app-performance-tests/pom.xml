@@ -36,7 +36,8 @@
                 </executions>
                 <configuration>
                     <trimStackTrace>false</trimStackTrace>
-                    <argLine>-Xmx256m -Xms256m</argLine>
+                    <!-- see https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=911925 -->
+                    <argLine>-Xmx256m -Xms256m -Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
                 </configuration>
             </plugin>
             <plugin>
