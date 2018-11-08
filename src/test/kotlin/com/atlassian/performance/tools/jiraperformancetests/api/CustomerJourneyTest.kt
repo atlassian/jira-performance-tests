@@ -10,24 +10,24 @@ import org.zeroturnaround.exec.ProcessExecutor
 import java.nio.file.Paths
 import java.util.concurrent.TimeUnit
 
-class VendorJourneyTest {
+class CustomerJourneyTest {
 
     @Test
     @Category(AcceptanceCategory::class)
-    fun shouldRunRefApp() {
+    fun shouldLinkLibrariesInBtfExample() {
         val jptVersion: String = SystemProperty("jpt.version").dereference()
         val mavenProcess = MavenProcess(
-            arguments = listOf("install", "-Djpt.version=$jptVersion"),
             processExecutor = ProcessExecutor()
-                .directory(Paths.get("examples", "ref-app").toFile())
-                .timeout(55, TimeUnit.MINUTES)
+                .directory(Paths.get("examples", "btf-test").toFile())
+                .timeout(7, TimeUnit.MINUTES),
+            arguments = listOf("verify", "-Djpt.version=$jptVersion")
         )
 
         val result = mavenProcess.run()
 
-        val lastFewLinesOfOutput = result.output.lines.takeLast(12).joinToString(separator = "\n")
-        assertThat(lastFewLinesOfOutput)
-            .`as`("last few lines of output")
-            .contains("BUILD SUCCESS")
+        val outputAfterTests = result.output.lines.dropWhile { it != "[INFO]  T E S T S" }
+        assertThat(outputAfterTests)
+            .`as`("the btf-test example should link libraries successfully")
+            .noneMatch { it.contains("NoSuchMethodError") }
     }
 }

@@ -35,6 +35,7 @@ configurations.all {
                 "com.google.guava:guava" -> useVersion("23.6-jre")
                 "org.apache.commons:commons-csv" -> useVersion("1.4")
                 "commons-logging:commons-logging" -> useVersion("1.2")
+                "commons-io:commons-io" -> useVersion("2.5")
                 "org.apache.httpcomponents:httpclient" -> useVersion("4.5.5")
                 "org.apache.httpcomponents:httpcore" -> useVersion("4.4.9")
                 "org.codehaus.plexus:plexus-utils" -> useVersion("3.1.0")
@@ -77,7 +78,8 @@ dependencies {
 
     listOf(
         "junit:junit:4.12",
-        "org.assertj:assertj-core:3.11.0"
+        "org.assertj:assertj-core:3.11.0",
+        "org.zeroturnaround:zt-exec:1.10"
     ).forEach { testCompile(it) }
 }
 
@@ -102,13 +104,14 @@ tasks.getByName("test", Test::class).apply {
 val testAcceptance = task<Test>("testAcceptance") {
     dependsOn("publishToMavenLocal")
     systemProperty("jpt.version", version)
-    maxParallelForks = 2
+    maxParallelForks = 3
 }
 
 tasks.withType(Test::class.java) {
     val shadowJarTask = tasks.getByPath(":reference-virtual-users:shadowJar")
     dependsOn(shadowJarTask)
     systemProperty("jpt.virtual-users.shadow-jar", shadowJarTask.outputs.files.files.first())
+    failFast = true
 }
 
 tasks["release"].dependsOn(testAcceptance)

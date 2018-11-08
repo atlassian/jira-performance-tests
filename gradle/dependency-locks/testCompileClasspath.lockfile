@@ -119,4 +119,5 @@ org.slf4j:slf4j-api:1.8.0-alpha2
 org.sonatype.plexus:plexus-cipher:1.4
 org.sonatype.plexus:plexus-sec-dispatcher:1.4
 org.yaml:snakeyaml:1.18
+org.zeroturnaround:zt-exec:1.10
 software.amazon.ion:ion-java:1.0.2
