@@ -22,6 +22,7 @@ class CustomerJourneyTest {
                 .timeout(7, TimeUnit.MINUTES),
             arguments = listOf("verify", "-Djpt.version=$jptVersion")
         )
+        Thread.sleep(10000) // Work around https://github.com/takari/maven-wrapper/issues/93
 
         val result = mavenProcess.run()
 
