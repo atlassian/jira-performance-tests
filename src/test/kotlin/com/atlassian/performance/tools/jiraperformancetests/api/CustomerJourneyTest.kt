@@ -26,9 +26,13 @@ class CustomerJourneyTest {
 
         val result = mavenProcess.run()
 
-        val outputAfterTests = result.output.lines.dropWhile { it != "[INFO]  T E S T S" }
+        val testsHeader = "[INFO]  T E S T S"
+        assertThat(result.output.lines)
+            .`as`("the example should reach the tests")
+            .contains(testsHeader)
+        val outputAfterTests = result.output.lines.dropWhile { it != testsHeader }
         assertThat(outputAfterTests)
-            .`as`("the btf-test example should link libraries successfully")
+            .`as`("the example should link libraries successfully")
             .noneMatch { it.contains("NoSuchMethodError") }
     }
 }

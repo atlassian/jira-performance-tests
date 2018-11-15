@@ -12,7 +12,8 @@ class MavenProcess(
     private val arguments: List<String>
 ) {
     /**
-     * We don't want to hang forever, it works now, but feel free to adjust if its causing problems.
+     * We don't want to hang forever, so we need a timeout.
+     * It's short, because it was enough for the buffered readers to flush.
      */
     private val closeTimeout: Duration = Duration.ofSeconds(4)
 
@@ -20,8 +21,7 @@ class MavenProcess(
         .command(getMavenCommand(), *arguments.toTypedArray())
         .closeTimeout(closeTimeout.toMillis(), TimeUnit.MILLISECONDS)
         .readOutput(true)
-        .redirectOutput(System.out)
-        .redirectError(System.err)
+        .redirectOutputAlsoTo(System.out)
         .execute()
 
     private fun getMavenCommand(): String {
