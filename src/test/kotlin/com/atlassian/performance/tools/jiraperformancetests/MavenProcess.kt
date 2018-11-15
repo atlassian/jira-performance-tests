@@ -1,6 +1,7 @@
 package com.atlassian.performance.tools.jiraperformancetests
 
-import org.codehaus.plexus.util.Os
+import org.codehaus.plexus.util.Os.FAMILY_WINDOWS
+import org.codehaus.plexus.util.Os.isFamily
 import org.zeroturnaround.exec.ProcessExecutor
 import org.zeroturnaround.exec.ProcessResult
 import java.time.Duration
@@ -16,13 +17,18 @@ class MavenProcess(
     private val closeTimeout: Duration = Duration.ofSeconds(4)
 
     fun run(): ProcessResult = processExecutor
-        .command(
-            if (Os.isFamily(Os.FAMILY_WINDOWS)) "mvnw.cmd" else "./mvnw",
-            *arguments.toTypedArray()
-        )
+        .command(getMavenCommand(), *arguments.toTypedArray())
         .closeTimeout(closeTimeout.toMillis(), TimeUnit.MILLISECONDS)
         .readOutput(true)
         .redirectOutput(System.out)
         .redirectError(System.err)
         .execute()
+
+    private fun getMavenCommand(): String {
+        return if (isFamily(FAMILY_WINDOWS)) {
+            processExecutor.directory.toPath().resolve("mvnw.cmd").toString()
+        } else {
+            "./mvnw"
+        }
+    }
 }
