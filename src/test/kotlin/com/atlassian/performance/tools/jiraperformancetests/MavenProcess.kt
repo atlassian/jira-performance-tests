@@ -26,7 +26,7 @@ class MavenProcess(
 
     private fun getMavenCommand(): String {
         return if (isFamily(FAMILY_WINDOWS)) {
-            processExecutor.directory.toPath().resolve("mvnw.cmd").toString()
+            processExecutor.directory.toPath().toAbsolutePath().resolve("mvnw.cmd").toString()
         } else {
             "./mvnw"
         }
