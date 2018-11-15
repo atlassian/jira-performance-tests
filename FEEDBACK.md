@@ -49,4 +49,4 @@ you create a new suggestion, make sure you describe:
 [suggestion-list]: https://ecosystem.atlassian.net/issues/?filter=61606
 [suggestion-create]: https://ecosystem.atlassian.net/secure/CreateIssue!default.jspa?projectKey=JPERF&issuetype=11500
 [bug-list]: https://ecosystem.atlassian.net/issues/?filter=61607
-[bug-create]: https://ecosystem.atlassian.net/secure/CreateIssue\!default.jspa?projectKey=JPERF&issuetype=1
+[bug-create]: https://ecosystem.atlassian.net/secure/CreateIssue!default.jspa?projectKey=JPERF&issuetype=1
