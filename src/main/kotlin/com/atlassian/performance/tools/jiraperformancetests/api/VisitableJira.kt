@@ -4,7 +4,7 @@ import java.net.URI
 import javax.json.Json
 import javax.json.JsonObject
 
-data class VisitableJira(
+class VisitableJira(
     val address: URI
 ) {
     constructor(

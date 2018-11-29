@@ -43,7 +43,9 @@ class AppImpactTestSmokeTest {
                 capacity = SupportCapacityMediator(
                     support = support,
                     region = region
-                )
+                ),
+                regionsWithHousekeeping = listOf(Regions.US_EAST_1),
+                batchingCloudformationRefreshPeriod = Duration.ofMinutes(1)
             ),
             testJar = dereference("jpt.virtual-users.shadow-jar")
         )

@@ -4,7 +4,6 @@ import com.atlassian.performance.tools.aws.api.Aws
 import com.atlassian.performance.tools.aws.api.Investment
 import com.atlassian.performance.tools.awsinfrastructure.api.DatasetCatalogue
 import com.atlassian.performance.tools.awsinfrastructure.api.InfrastructureFormula
-import com.atlassian.performance.tools.awsinfrastructure.api.VirtualUsersConfiguration
 import com.atlassian.performance.tools.awsinfrastructure.api.jira.StandaloneFormula
 import com.atlassian.performance.tools.awsinfrastructure.api.storage.JiraSoftwareStorage
 import com.atlassian.performance.tools.awsinfrastructure.api.virtualusers.Ec2VirtualUsersFormula
@@ -20,6 +19,9 @@ import com.atlassian.performance.tools.report.api.Criteria
 import com.atlassian.performance.tools.report.api.PerformanceCriteria
 import com.atlassian.performance.tools.report.api.judge.MaximumCoverageJudge
 import com.atlassian.performance.tools.virtualusers.api.VirtualUserLoad
+import com.atlassian.performance.tools.virtualusers.api.browsers.Browser
+import com.atlassian.performance.tools.virtualusers.api.browsers.HeadlessChromeBrowser
+import com.atlassian.performance.tools.virtualusers.api.config.VirtualUserBehavior
 import com.atlassian.performance.tools.workspace.api.RootWorkspace
 import com.atlassian.performance.tools.workspace.api.TestWorkspace
 import com.google.common.util.concurrent.ThreadFactoryBuilder
@@ -48,6 +50,7 @@ class AppImpactTest(
     )
 
     var scenario: Class<out Scenario> = JiraSoftwareScenario::class.java
+    var browser: Class<out Browser> = HeadlessChromeBrowser::class.java
     var criteria: Map<ActionType<*>, Criteria> = emptyMap()
     var jiraVersion: String = "7.5.0"
     var duration: Duration = Duration.ofMinutes(20)
@@ -78,19 +81,21 @@ class AppImpactTest(
             cohort = "with $appLabel",
             app = app
         )
-        val vuConfig = VirtualUsersConfiguration(
+        val virtualUserBehavior = VirtualUserBehavior(
+            load = load,
+            browser = browser,
             scenario = scenario,
-            virtualUserLoad = load
+            diagnosticsLimit = 255,
+            seed = 123
         )
-
         val executor = Executors.newFixedThreadPool(
             2,
             ThreadFactoryBuilder()
                 .setNameFormat("standalone-stability-test-thread-%d")
                 .build()
         )
-        val futureBaselineResults = baseline.runAsync(workspace, executor, vuConfig)
-        val futureExperimentResults = experiment.runAsync(workspace, executor, vuConfig)
+        val futureBaselineResults = baseline.runAsync(workspace, executor, virtualUserBehavior)
+        val futureExperimentResults = experiment.runAsync(workspace, executor, virtualUserBehavior)
         val baselineResults = futureBaselineResults.get()
         val experimentResults = futureExperimentResults.get()
         executor.shutdownNow()

@@ -1,7 +1,6 @@
 package com.atlassian.performance.tools.jiraperformancetests.api
 
 import com.atlassian.performance.tools.awsinfrastructure.api.InfrastructureFormula
-import com.atlassian.performance.tools.awsinfrastructure.api.VirtualUsersConfiguration
 import com.atlassian.performance.tools.concurrency.api.submitWithLogContext
 import com.atlassian.performance.tools.io.api.ensureDirectory
 import com.atlassian.performance.tools.jiraactions.api.parser.MergingActionMetricsParser
@@ -10,6 +9,7 @@ import com.atlassian.performance.tools.report.api.parser.SystemMetricsParser
 import com.atlassian.performance.tools.report.api.result.CohortResult
 import com.atlassian.performance.tools.report.api.result.FailedCohortResult
 import com.atlassian.performance.tools.report.api.result.FullCohortResult
+import com.atlassian.performance.tools.virtualusers.api.config.VirtualUserBehavior
 import com.atlassian.performance.tools.workspace.api.TestWorkspace
 import org.apache.logging.log4j.CloseableThreadContext
 import org.apache.logging.log4j.LogManager
@@ -28,18 +28,18 @@ class ProvisioningPerformanceTest(
     fun runAsync(
         workingDirectory: TestWorkspace,
         executor: ExecutorService,
-        virtualUsersConfiguration: VirtualUsersConfiguration
+        behavior: VirtualUserBehavior
     ): CompletableFuture<CohortResult> {
         return executor.submitWithLogContext(cohort) {
             CloseableThreadContext.put("cohort", cohort).use {
-                run(workingDirectory, virtualUsersConfiguration)
+                run(workingDirectory, behavior)
             }
         }
     }
 
     fun run(
         workingDirectory: TestWorkspace,
-        virtualUsersConfiguration: VirtualUsersConfiguration
+        behavior: VirtualUserBehavior
     ): CohortResult {
         val workspace = workingDirectory.directory.resolve(cohort).ensureDirectory()
         try {
@@ -48,7 +48,7 @@ class ProvisioningPerformanceTest(
             val resource = provisionedInfrastructure.resource
             val downloadedResults: Path
             try {
-                infrastructure.applyLoad(virtualUsersConfiguration)
+                infrastructure.applyLoad(behavior)
             } catch (e: Exception) {
                 logger.error("Failed to test on $infrastructure", e)
                 throw e

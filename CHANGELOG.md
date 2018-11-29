@@ -18,6 +18,22 @@ The API consists of all public Java types from `com.atlassian.performance.tools.
 ## [Unreleased]
 [Unreleased]: https://bitbucket.org/atlassian/jira-performance-tests/branches/compare/master%0Drelease-1.3.0
 
+### Added
+- Allow JPT to instantiate different browsers which resolves [JPERF-169].
+- Add support for `virtual-users:3.3.4`.
+- Add support for `infrastructure:4`.
+- Add support for `aws-infrastructure:2` which resolves [JPERF-280].
+
+### Removed
+- Drop deprecated classes `AppRegressionTest`,`AwsPluginTester` and `BtfJiraPerformanceMeter`.
+- Drop support of `virtual-users:2`.
+- Drop support of `infrastructure:2`.
+- Drop support of `aws-infrastructure:1`.
+- Remove Kotlin data-class generated methods from API.
+
+[JPERF-169]: https://ecosystem.atlassian.net/browse/JPERF-169
+[JPERF-280]: https://ecosystem.atlassian.net/browse/JPERF-280
+
 ## [1.3.0] - 2018-10-31
 [1.3.0]: https://bitbucket.org/atlassian/jira-performance-tests/branches/compare/release-1.3.0%0Drelease-1.2.1
 

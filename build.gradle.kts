@@ -7,7 +7,7 @@ import com.vanniktech.dependency.graph.generator.DependencyGraphGeneratorExtensi
 import guru.nidi.graphviz.attribute.Color
 import guru.nidi.graphviz.attribute.Style
 
-val kotlinVersion = "1.2.30"
+val kotlinVersion = "1.2.70"
 
 buildscript {
     repositories {
@@ -19,7 +19,7 @@ buildscript {
 }
 
 plugins {
-    kotlin("jvm").version("1.2.30")
+    kotlin("jvm").version("1.2.70")
     id("com.atlassian.performance.tools.gradle-release").version("0.4.3")
     `java-library`
 }
@@ -45,6 +45,9 @@ configurations.all {
                 "org.jsoup:jsoup" -> useVersion("1.10.2")
                 "com.fasterxml.jackson.core:jackson-core" -> useVersion("2.9.4")
             }
+            when (requested.group) {
+                "org.jetbrains.kotlin" -> useVersion(kotlinVersion)
+            }
         }
     }
 }
@@ -64,14 +67,14 @@ dependencies {
 
     api("com.atlassian.performance.tools:workspace:[2.0.0,3.0.0)")
     api("com.atlassian.performance.tools:report:[2.1.0,3.0.0)")
-    api("com.atlassian.performance.tools:infrastructure:[2.1.0,3.0.0)")
+    api("com.atlassian.performance.tools:infrastructure:[4.0.0,5.0.0)")
 
     listOf(
-        "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlinVersion",
+        "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion",
         "com.atlassian.performance.tools:aws-resources:[1.0.0,2.0.0)",
-        "com.atlassian.performance.tools:aws-infrastructure:[1.0.0,2.0.0)",
+        "com.atlassian.performance.tools:aws-infrastructure:[2.0.0,3.0.0)",
         "com.atlassian.performance.tools:jira-software-actions:[1.0.0,2.0.0)",
-        "com.atlassian.performance.tools:virtual-users:[2.2.0,3.0.0)"
+        "com.atlassian.performance.tools:virtual-users:[3.3.4,4.0.0)"
     ).plus(
         log4jCore()
     ).forEach { implementation(it) }

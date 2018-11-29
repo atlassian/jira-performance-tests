@@ -1,6 +1,8 @@
 import java.net.URI
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
+val kotlinVersion = "1.2.70"
+
 plugins {
     kotlin("jvm")
     id("com.github.johnrengelman.shadow").version("2.0.4")
@@ -8,7 +10,7 @@ plugins {
 
 dependencies {
     runtime("com.atlassian.performance.tools:jira-software-actions:[1.0.0,2.0.0)")
-    runtime("com.atlassian.performance.tools:virtual-users:[2.0.0,3.0.0)")
+    runtime("com.atlassian.performance.tools:virtual-users:[3.3.4,4.0.0)")
 }
 
 tasks.getByName("shadowJar", ShadowJar::class).apply {
@@ -24,6 +26,9 @@ configurations.all {
                 "commons-codec:commons-codec" -> useVersion("1.10")
                 "com.google.code.gson:gson" -> useVersion("2.8.2")
                 "org.slf4j:slf4j-api" -> useVersion("1.8.0-alpha2")
+            }
+            when (requested.group) {
+                "org.jetbrains.kotlin" -> useVersion(kotlinVersion)
             }
         }
     }
