@@ -16,7 +16,10 @@ The API consists of all public Java types from `com.atlassian.performance.tools.
 [behavioral compatibility]: http://cr.openjdk.java.net/~darcy/OpenJdkDevGuide/OpenJdkDevelopersGuide.v0.777.html#behavioral_compatibility
 
 ## [Unreleased]
-[Unreleased]: https://bitbucket.org/atlassian/jira-performance-tests/branches/compare/master%0Drelease-1.3.0
+[Unreleased]: https://bitbucket.org/atlassian/jira-performance-tests/branches/compare/master%0Drelease-2.0.0
+
+## [2.0.0] - 2018-12-03
+[2.0.0]: https://bitbucket.org/atlassian/jira-performance-tests/branches/compare/release-2.0.0%0Drelease-1.3.0
 
 ### Added
 - Allow JPT to instantiate different browsers which resolves [JPERF-169].
