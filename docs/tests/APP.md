@@ -33,8 +33,8 @@ You can install and run JPT from any system that has:
 
 ### Amazon Web Services instances
 
-JPT provisions Jira instances in AWS.
-When you run JPT, you will be prompted for your AWS credentials.
+JPT provisions Jira instances in AWS and you need to supply your AWS credentials before running the tests.
+Please check **Setting your AWS credentials** section of this README that explains how to do that.  
 
 Keep in mind that running JPT's tests will incur AWS usage costs.
 Your own costs may vary depending on the size and resource usage of your app.
