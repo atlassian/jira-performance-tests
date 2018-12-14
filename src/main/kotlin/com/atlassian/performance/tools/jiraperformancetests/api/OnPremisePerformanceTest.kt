@@ -46,7 +46,7 @@ class OnPremisePerformanceTest(
             ),
             browser = browser,
             scenario = scenario,
-            diagnosticsLimit = 0,
+            diagnosticsLimit = 64,
             seed = Random().nextLong()
         )
         val virtualUserTarget = VirtualUserTarget(

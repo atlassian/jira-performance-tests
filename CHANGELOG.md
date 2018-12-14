@@ -18,6 +18,11 @@ The API consists of all public Java types from `com.atlassian.performance.tools.
 ## [Unreleased]
 [Unreleased]: https://bitbucket.org/atlassian/jira-performance-tests/branches/compare/master%0Drelease-2.0.0
 
+### Fixed
+- Enable diagnostics for `OnPremisePerformanceTest`. Resolve JPERF-232.
+
+[JPERF-232]: https://ecosystem.atlassian.net/browse/JPERF-232
+
 ## [2.0.0] - 2018-12-03
 [2.0.0]: https://bitbucket.org/atlassian/jira-performance-tests/branches/compare/release-2.0.0%0Drelease-1.3.0
 
