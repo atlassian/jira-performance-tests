@@ -16,7 +16,10 @@ The API consists of all public Java types from `com.atlassian.performance.tools.
 [behavioral compatibility]: http://cr.openjdk.java.net/~darcy/OpenJdkDevGuide/OpenJdkDevelopersGuide.v0.777.html#behavioral_compatibility
 
 ## [Unreleased]
-[Unreleased]: https://bitbucket.org/atlassian/jira-performance-tests/branches/compare/master%0Drelease-2.0.1
+[Unreleased]: https://bitbucket.org/atlassian/jira-performance-tests/branches/compare/master%0Drelease-2.0.2
+
+## [2.0.2] - 2018-12-18 🎂
+[2.0.1]: https://bitbucket.org/atlassian/jira-performance-tests/branches/compare/release-2.0.2%0Drelease-2.0.1
 
 ### Fixed
 - Timeline for `OnPremisePerformanceTest`. Resolve [JPERF-309].
