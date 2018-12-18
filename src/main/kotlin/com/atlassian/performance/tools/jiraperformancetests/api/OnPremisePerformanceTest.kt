@@ -5,8 +5,8 @@ import com.atlassian.performance.tools.jiraactions.api.parser.MergingActionMetri
 import com.atlassian.performance.tools.jiraactions.api.scenario.Scenario
 import com.atlassian.performance.tools.jirasoftwareactions.api.JiraSoftwareScenario
 import com.atlassian.performance.tools.report.api.FullReport
+import com.atlassian.performance.tools.report.api.FullTimeline
 import com.atlassian.performance.tools.report.api.HistoricalCohortsReporter
-import com.atlassian.performance.tools.report.api.StandardTimeline
 import com.atlassian.performance.tools.report.api.parser.MergingNodeCountParser
 import com.atlassian.performance.tools.report.api.parser.SystemMetricsParser
 import com.atlassian.performance.tools.report.api.result.FullCohortResult
@@ -73,7 +73,7 @@ class OnPremisePerformanceTest(
             systemParser = SystemMetricsParser(),
             nodeParser = MergingNodeCountParser()
         ).prepareForJudgement(
-            timeline = StandardTimeline(options.behavior.load.total)
+            timeline = FullTimeline()
         )
         FullReport().dump(
             results = listOf(result),

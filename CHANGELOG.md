@@ -18,6 +18,11 @@ The API consists of all public Java types from `com.atlassian.performance.tools.
 ## [Unreleased]
 [Unreleased]: https://bitbucket.org/atlassian/jira-performance-tests/branches/compare/master%0Drelease-2.0.1
 
+### Fixed
+- Timeline for `OnPremisePerformanceTest`. Resolve [JPERF-309].
+
+[JPERF-309]: https://ecosystem.atlassian.net/browse/JPERF-309
+
 ## [2.0.1] - 2018-12-17 🎄
 [2.0.1]: https://bitbucket.org/atlassian/jira-performance-tests/branches/compare/release-2.0.1%0Drelease-2.0.0
 
