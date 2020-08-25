@@ -1,3 +1,9 @@
+## Repository migration in progress
+
+⚠️ This repository hasn't been fully migrated from its original location yet. Until this happens, active development takes place here: https://bitbucket.org/atlassian/jira-performance-tests/.
+
+## 
+
 ![picture](docs/JPT-banner@1x.png)
 
 Jira Performance Tests (JPT) is a fully-automated performance benchmarking tool designed for Jira Server and Jira Data Center.
